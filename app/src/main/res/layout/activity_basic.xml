@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".BasicActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16sp"
+        android:text="프로필을 완성해보아요"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textSize="10sp"
+        android:textColor="#7B6F72"
+        android:text="우리가 당신에 대해 더 많이 알 수 있도록 도움을 주세요." />
+
+    <ImageView
+        android:id="@+id/character"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/two_character"/>
+    
+    <RadioGroup
+        android:id="@+id/rGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/btnMan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="남자" />
+
+        <RadioButton
+            android:id="@+id/btnWoman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여자" />
+    </RadioGroup>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/button_eee_65"
+            android:textSize="15dp"
+            android:hint="키"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:background="#eeeeee"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:text="cm"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/button_eee_65"
+            android:textSize="15dp"
+            android:hint="몸무게"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:background="#eeeeee"
+            android:layout_marginRight="20dp"
+            android:textSize="20sp"
+            android:text="kg"/>
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_blue_65"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:text="다음"/>
+
+</LinearLayout>

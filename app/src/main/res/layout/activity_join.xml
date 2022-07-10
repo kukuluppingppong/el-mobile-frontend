@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".JoinActivity">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:paddingLeft="20dp"
+        android:background="@drawable/button_eee_65"
+        android:textSize="15dp"
+        android:hint="아이디"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/button_eee_65"
+            android:textSize="15dp"
+            android:hint="비밀번호"/>
+
+        <ImageButton
+            android:id="@+id/btnHide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:background="#eeeeee"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_hide"
+            android:tag="0"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/button_eee_65"
+            android:textSize="15dp"
+            android:hint="비밀번호 확인"/>
+
+        <ImageButton
+            android:id="@+id/btnHideAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:background="#eeeeee"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_hide"
+            android:tag="0"/>
+
+    </FrameLayout>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/button_eee_65"
+        android:textSize="15dp"
+        android:hint="이름"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/button_eee_65"
+        android:textSize="15dp"
+        android:hint="닉네임"/>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="20dp"
+        android:background="@drawable/button_eee_65"
+        android:textSize="15dp"
+        android:hint="전화번호"/>
+
+    <Button
+        android:id="@+id/btnJoin"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_blue_65"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:text="회원가입"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            android:background="#DDDADA" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="#DDDADA" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="이미 계정이 있나요? 로그인"/>
+
+</LinearLayout>
