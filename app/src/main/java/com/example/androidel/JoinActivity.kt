@@ -14,6 +14,7 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnJoin.setOnClickListener {
+            User.name = binding.edtName.text.toString()
             val intent = Intent(applicationContext, BasicActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)

@@ -11,13 +11,11 @@
     <ImageView
         android:layout_width="230dp"
         android:layout_height="210dp"
-        android:layout_gravity="center"
         android:src="@drawable/login"/>
 
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
@@ -27,7 +25,6 @@
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
@@ -37,7 +34,6 @@
     <Button
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@drawable/button_blue_65"
         android:textColor="#FFFFFF"
@@ -71,6 +67,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="회원가입"/>
+
     </LinearLayout>
 
     <LinearLayout

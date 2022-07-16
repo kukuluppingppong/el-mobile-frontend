@@ -1,5 +1,7 @@
 package com.example.androidel
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TrainerAdapter(val trainerList: ArrayList<TrainerDataClass>): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
+
+class TrainerAdapter(val context: Context, val trainerList: MutableList<TrainerDataClass>): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
+    var intent: Intent? = null
+    var choiceTrainer: MutableList<TrainerDataClass> = arrayListOf()
+    var choiceNumber = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.trainer_item_view, parent, false)
@@ -16,16 +22,30 @@ class TrainerAdapter(val trainerList: ArrayList<TrainerDataClass>): RecyclerView
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.image.setImageResource(trainerList[position].image)
-        holder.name.text = trainerList[position].name
-        holder.day.text = trainerList[position].day
-        holder.time.text = trainerList[position].time
 
-        holder.chkBox.setOnClickListener {
-            if(holder.chkBox.isChecked) {
+        with(holder) {
+            image.setImageResource(trainerList[position].image)
+            name.text = trainerList[position].name
+            day.text = trainerList[position].day
+            time.text = trainerList[position].time
 
-            } else {
-
+            intent = Intent(context, TrainerAgainActivity::class.java)
+            chkBox.setOnClickListener {
+                if (trainerList[position].isChecked) {
+                    trainerList[position].isChecked = false
+                    if (choiceTrainer.size == 1) {
+                        choiceTrainer.clear()
+                    }
+                    else {
+                        choiceTrainer.removeAt(choiceNumber)
+                    }
+                }
+                else if (!trainerList[position].isChecked) {
+                    trainerList[position].isChecked = true
+                    choiceTrainer.add(trainerList[position])
+                    choiceNumber = trainerList[position].number
+                }
+                intent!!.putExtra("name", ArrayList(choiceTrainer))
             }
         }
     }

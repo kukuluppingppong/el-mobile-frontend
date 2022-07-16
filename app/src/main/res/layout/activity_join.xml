@@ -11,7 +11,6 @@
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
         android:textSize="15dp"
@@ -20,7 +19,6 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp">
 
         <EditText
@@ -46,7 +44,6 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp">
 
         <EditText
@@ -70,9 +67,9 @@
     </FrameLayout>
 
     <EditText
+        android:id="@+id/edtName"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
@@ -82,7 +79,6 @@
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
@@ -92,7 +88,6 @@
     <EditText
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
@@ -103,7 +98,6 @@
         android:id="@+id/btnJoin"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_blue_65"
         android:textColor="#FFFFFF"
@@ -144,7 +138,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:text="이미 계정이 있나요? 로그인"/>
 
