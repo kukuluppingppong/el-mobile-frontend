@@ -9,6 +9,7 @@
     tools:context=".JoinActivity">
 
     <EditText
+        android:id="@+id/editId"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
@@ -22,12 +23,14 @@
         android:layout_marginTop="15dp">
 
         <EditText
+            android:id="@+id/editPw"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:paddingLeft="20dp"
             android:background="@drawable/button_eee_65"
             android:textSize="15dp"
-            android:hint="비밀번호"/>
+            android:hint="비밀번호"
+            android:inputType="textPassword"/>
 
         <ImageButton
             android:id="@+id/btnHide"
@@ -47,12 +50,14 @@
         android:layout_marginTop="15dp">
 
         <EditText
+            android:id="@+id/editPwCheck"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:paddingLeft="20dp"
             android:background="@drawable/button_eee_65"
             android:textSize="15dp"
-            android:hint="비밀번호 확인"/>
+            android:hint="비밀번호 확인"
+            android:inputType="textPassword"/>
 
         <ImageButton
             android:id="@+id/btnHideAgain"
@@ -77,6 +82,7 @@
         android:hint="이름"/>
 
     <EditText
+        android:id="@+id/edtNick"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
@@ -86,13 +92,15 @@
         android:hint="닉네임"/>
 
     <EditText
+        android:id="@+id/edtNumber"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
         android:background="@drawable/button_eee_65"
         android:textSize="15dp"
-        android:hint="전화번호"/>
+        android:hint="전화번호"
+        android:inputType="phone"/>
 
     <Button
         android:id="@+id/btnJoin"
@@ -136,6 +144,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
