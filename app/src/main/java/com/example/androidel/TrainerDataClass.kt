@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class TrainerDataClass(
-    val number: Int,
     val image: Int,
     val name: String,
     val day: String,

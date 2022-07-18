@@ -2,8 +2,6 @@ package com.example.androidel
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,21 +9,32 @@ import com.example.androidel.databinding.ActivityTrainerBinding
 
 class TrainerActivity : AppCompatActivity() {
     val binding by lazy { ActivityTrainerBinding.inflate(layoutInflater) }
-    private lateinit var trainerAdapter:TrainerAdapter
+    private lateinit var trainerAdapter: TrainerAdapter
+    private lateinit var choiceDay: ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        var trainerList = mutableListOf(
-            TrainerDataClass(1, R.drawable.sample, "홍길동", "월요일", "14:00~15:00", false),
-            TrainerDataClass(2, R.drawable.sample, "홍동길", "월요일", "14:00~15:00", false),
-            TrainerDataClass(3, R.drawable.sample, "123", "월요일", "14:00~15:00", false),
-            TrainerDataClass(4, R.drawable.sample, "135324", "월요일", "14:00~15:00", false),
-            TrainerDataClass(5, R.drawable.sample, "13242", "월요일", "14:00~15:00", false),
-            TrainerDataClass(6, R.drawable.sample, "124321124", "월요일", "14:00~15:00", false))
+        choiceDay = ChoiceDay.choiceDaySave
 
-        trainerAdapter = TrainerAdapter(applicationContext, trainerList)
+        var trainerList = arrayListOf(
+            TrainerDataClass( R.drawable.sample, "홍길동", "월요일", "14:00~15:00", false),
+            TrainerDataClass( R.drawable.sample, "홍동길", "화요일", "14:00~15:00", false),
+            TrainerDataClass( R.drawable.sample, "123", "수요일", "14:00~15:00", false),
+            TrainerDataClass( R.drawable.sample, "135324", "목요일", "14:00~15:00", false),
+            TrainerDataClass( R.drawable.sample, "13242", "금요일", "14:00~15:00", false),
+            TrainerDataClass( R.drawable.sample, "124321124", "토요일", "14:00~15:00", false))
+
+        var trainerListCopy = ArrayList<TrainerDataClass>()
+        for( a in 0 until trainerList.size) {
+            for( b in 0 until choiceDay!!.size )
+             if(trainerList[a].day.contains(choiceDay[b])) {
+                 trainerListCopy.add(trainerList[a])
+             }
+        }
+
+        trainerAdapter = TrainerAdapter(applicationContext, trainerListCopy)
         binding.recyclerView.adapter = trainerAdapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 

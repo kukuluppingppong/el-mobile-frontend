@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class TrainerAdapter(val context: Context, val trainerList: MutableList<TrainerDataClass>): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
+class TrainerAdapter(val context: Context, val trainerList: ArrayList<TrainerDataClass>): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
     var intent: Intent? = null
     var choiceTrainer: MutableList<TrainerDataClass> = arrayListOf()
     var choiceNumber = 0
@@ -43,7 +43,7 @@ class TrainerAdapter(val context: Context, val trainerList: MutableList<TrainerD
                 else if (!trainerList[position].isChecked) {
                     trainerList[position].isChecked = true
                     choiceTrainer.add(trainerList[position])
-                    choiceNumber = trainerList[position].number
+                    choiceNumber = choiceTrainer.size-1
                 }
                 intent!!.putExtra("name", ArrayList(choiceTrainer))
             }
