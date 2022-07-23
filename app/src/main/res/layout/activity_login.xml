@@ -18,7 +18,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="30dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15sp"
         android:hint="아이디"/>
 
@@ -27,7 +27,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15sp"
         android:hint="비밀번호"/>
 
@@ -35,7 +35,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_blue_65"
+        android:background="@drawable/btn_blue_65"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="15dp"
@@ -111,10 +111,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="30dp">
+
             <Button
+                android:id="@+id/btnGoogle"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/button_dddada_10"/>
+                android:background="@drawable/btn_dddada_10"/>
 
             <ImageView
                 android:layout_width="30dp"
@@ -130,7 +132,7 @@
             <Button
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/button_dddada_10"/>
+                android:background="@drawable/btn_dddada_10"/>
 
             <ImageView
                 android:layout_width="30dp"

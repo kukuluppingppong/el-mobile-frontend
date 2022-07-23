@@ -31,6 +31,5 @@ class TrainerAgainAdapter(val trainerList: ArrayList<TrainerDataClass>): Recycle
         val name = itemView.findViewById<TextView>(R.id.name)
         val day = itemView.findViewById<TextView>(R.id.day)
         val time = itemView.findViewById<TextView>(R.id.time)
-        val chkBox = itemView.findViewById<CheckBox>(R.id.chkBox)
     }
 }

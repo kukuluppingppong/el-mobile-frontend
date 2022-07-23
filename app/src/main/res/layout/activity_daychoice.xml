@@ -156,7 +156,7 @@
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginLeft="50dp"
-            android:background="@drawable/button_dddada_10">
+            android:background="@drawable/btn_dddada_10">
 
             <TextView
                 android:id="@+id/textFirst"
@@ -187,7 +187,7 @@
         <FrameLayout
             android:layout_width="80dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_dddada_10">
+            android:background="@drawable/btn_dddada_10">
 
             <TextView
                 android:id="@+id/textLast"
@@ -215,7 +215,7 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/button_blue_65"
+        android:background="@drawable/btn_blue_65"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="15dp"

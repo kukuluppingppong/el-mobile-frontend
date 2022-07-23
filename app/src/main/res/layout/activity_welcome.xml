@@ -35,7 +35,7 @@
         android:id="@+id/btnNext"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:background="@drawable/button_blue_65"
+        android:background="@drawable/btn_blue_65"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="15dp"

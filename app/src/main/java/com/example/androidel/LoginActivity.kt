@@ -18,5 +18,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
+
+        binding.btnGoogle.setOnClickListener {
+            var intent = Intent(applicationContext, SendActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 }

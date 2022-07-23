@@ -13,7 +13,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15dp"
         android:hint="아이디"/>
 
@@ -27,7 +27,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:paddingLeft="20dp"
-            android:background="@drawable/button_eee_65"
+            android:background="@drawable/btn_eee_65"
             android:textSize="15dp"
             android:hint="비밀번호"
             android:inputType="textPassword"/>
@@ -54,7 +54,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:paddingLeft="20dp"
-            android:background="@drawable/button_eee_65"
+            android:background="@drawable/btn_eee_65"
             android:textSize="15dp"
             android:hint="비밀번호 확인"
             android:inputType="textPassword"/>
@@ -77,7 +77,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15dp"
         android:hint="이름"/>
 
@@ -87,7 +87,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15dp"
         android:hint="닉네임"/>
 
@@ -97,7 +97,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:paddingLeft="20dp"
-        android:background="@drawable/button_eee_65"
+        android:background="@drawable/btn_eee_65"
         android:textSize="15dp"
         android:hint="전화번호"
         android:inputType="phone"/>
@@ -107,7 +107,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_blue_65"
+        android:background="@drawable/btn_blue_65"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="15dp"
