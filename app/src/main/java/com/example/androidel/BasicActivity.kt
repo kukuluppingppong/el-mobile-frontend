@@ -33,7 +33,7 @@ class BasicActivity : AppCompatActivity() {
 //                return@setOnClickListener
 //            }
 
-            val intent = Intent(applicationContext, DaychoiceActivity::class.java)
+            val intent = Intent(applicationContext, TrainerActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }

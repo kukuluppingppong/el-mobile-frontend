@@ -8,28 +8,15 @@
     android:gravity="center"
     tools:context=".TrainerActivity">
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:text="우리 같이 맞춰봐요"/>
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_arrow_back"
-            android:background="@color/white"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="35dp"
-            android:textAlignment="center"
-            android:textSize="16sp"
-            android:text="우리 같이 맞춰봐요"/>
-    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
