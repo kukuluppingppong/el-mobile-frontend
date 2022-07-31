@@ -10,29 +10,24 @@ import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
-import android.text.Selection.getSelectionStart
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.*
 import androidx.core.content.ContextCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.databinding.ActivitySendBinding
-import org.jetbrains.annotations.Nullable
 
 
 class SendActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySendBinding.inflate(layoutInflater) }
     private lateinit var sendAdapter: SendAdapter
-    var list = ArrayList<Uri>()
-    private lateinit var exerciseKind: ArrayList<String>
+    private lateinit var list: ArrayList<Uri>
 
-    private val OPEN_GALLERY = 1002
+    val OPEN_GALLERY = 1002
     private val VIDEO_FILE_REQUEST = 1003
     var btnSelect = 0
 
@@ -41,27 +36,49 @@ class SendActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-       exerciseKind = arrayListOf("트레이너가", "전달해준", "운동", "종류")
+        initImageViewProfile()
 
-        sendAdapter = SendAdapter(exerciseKind)
+        binding.btnExercise.isSelected = true
+
+        binding.btnExercise.setOnClickListener {
+            binding.btnExercise.isSelected = true
+            binding.btnFood.isSelected = false
+            binding.foodLayout.visibility = View.INVISIBLE
+            binding.exerciseLayout.visibility = View.VISIBLE
+        }
+
+        binding.btnFood.setOnClickListener {
+            binding.btnExercise.isSelected = false
+            binding.btnFood.isSelected = true
+            binding.foodLayout.visibility = View.VISIBLE
+            binding.exerciseLayout.visibility = View.INVISIBLE
+        }
+
+        sendAdapter = SendAdapter(
+            onClick = {
+                navigateVideo()
+            }
+        )
+
         binding.recyclerView.adapter = sendAdapter
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.btnFood1.setOnClickListener {
             btnSelect = 1
-            initImageViewProfile()
+            navigateGallery()
         }
 
         binding.btnFood2.setOnClickListener {
             btnSelect = 2
-            initImageViewProfile()
+            navigateGallery()
         }
 
         binding.btnFood3.setOnClickListener {
             btnSelect = 3
-            initVideoViewProfile()
+            navigateGallery()
         }
+
 
         binding.edtOpinion.addTextChangedListener(object: TextWatcher {
             var maxText = ""
@@ -94,9 +111,9 @@ class SendActivity : AppCompatActivity() {
                         val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
                         val bitmap = ImageDecoder.decodeBitmap(source)
                         when (btnSelect) {
-                            1 -> binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width, binding.btnFood1.height, false))
-                            2 -> binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width, binding.btnFood1.height, false))
-                            3 -> binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width, binding.btnFood1.height, false))
+                            1 -> binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                            2 -> binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                            3 -> binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                         }
                     }
                 }catch(e: Exception)
@@ -113,26 +130,34 @@ class SendActivity : AppCompatActivity() {
         if(requestCode == VIDEO_FILE_REQUEST) {
             if(resultCode == RESULT_OK)
             {
+                list = arrayListOf()
                 val videoUri = data?.clipData
-                val count = data?.clipData!!.itemCount
-                if (count < exerciseKind.size) {
-                    Toast.makeText(applicationContext, "순서대로 총 영상 ${exerciseKind.size}개 선택해 주세요", Toast.LENGTH_LONG).show()
+                if (videoUri == null) {
+                    sendAdapter.setVideoOne(data?.data)
                 }
-                if (count >= exerciseKind.size) {
-                    try{
-                        videoUri?.let {
-                            for (i in 0 until count) {
-                                val imageUri = data.clipData!!.getItemAt(i).uri
-                                list.add(imageUri)
-                            }
-                            sendAdapter.setVideoList(list)
+
+                var count = data?.clipData?.itemCount
+                if(count == null) {
+                    count = 1
+                }
+//                if (count < exerciseKind.size) {
+//                    Toast.makeText(applicationContext, "순서대로 총 영상 ${exerciseKind.size}개 선택해 주세요", Toast.LENGTH_LONG).show()
+//                }
+//                if (count >= exerciseKind.size) {
+                try{
+                    videoUri?.let {
+                        for (i in 0 until count) {
+                            val imageUri = videoUri.getItemAt(i).uri
+                            list.add(imageUri)
                         }
-                    }catch(e: Exception)
-                    {
-                        e.printStackTrace()
+                        sendAdapter.setVideoList(list)
                     }
+                }catch(e: Exception)
+                {
+                    e.printStackTrace()
                 }
             }
+
             else if(resultCode == RESULT_CANCELED)
             {
                 Toast.makeText(this, "영상 선택 취소", Toast.LENGTH_LONG).show();
@@ -143,20 +168,14 @@ class SendActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
             OPEN_GALLERY -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    navigateGallery()
-                else
-                    Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
-            }
-            VIDEO_FILE_REQUEST -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-                    navigateVideo()
+                    Toast.makeText(this, "권한을 승인하셨습니다.", Toast.LENGTH_SHORT).show()
                 else
                     Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -170,31 +189,6 @@ class SendActivity : AppCompatActivity() {
             ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-                navigateGallery()
-            }
-
-            // 갤러리 접근 권한이 없는 경우 & 교육용 팝업을 보여줘야 하는 경우
-            shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                showPermissionContextPopup()
-            }
-
-            // 권한 요청 하기(requestPermissions) -> 갤러리 접근(onRequestPermissionResult)
-            else ->
-                requestPermissions(
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                OPEN_GALLERY
-            )
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun initVideoViewProfile() {
-        when {
-            // 갤러리 접근 권한이 있는 경우
-            ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
-                navigateVideo()
             }
 
             // 갤러리 접근 권한이 없는 경우 & 교육용 팝업을 보여줘야 하는 경우
@@ -206,7 +200,7 @@ class SendActivity : AppCompatActivity() {
             else ->
                 requestPermissions(
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-                    VIDEO_FILE_REQUEST
+                    OPEN_GALLERY
                 )
         }
     }
@@ -221,7 +215,7 @@ class SendActivity : AppCompatActivity() {
         startActivityForResult(vod_intent, VIDEO_FILE_REQUEST)
     }
 
-    private fun navigateGallery() {
+    fun navigateGallery() {
         val intent = Intent()
         // 가져올 컨텐츠들 중에서 Image 만을 가져온다.
         intent.type = "image/*"
@@ -241,5 +235,24 @@ class SendActivity : AppCompatActivity() {
             .setNegativeButton("취소하기") { _, _ -> }
             .create()
             .show()
+    }
+
+    fun createThumbnail(activity: Context?, path: String?): Bitmap? {
+        var mediaMetadataRetriever: MediaMetadataRetriever? = null
+        var bitmap: Bitmap? = null
+        try {
+            mediaMetadataRetriever = MediaMetadataRetriever()
+            mediaMetadataRetriever.setDataSource(activity, Uri.parse(path))
+            //timeUs는 마이크로 초 이므로 1000000초 곱해줘야 초단위다.
+            bitmap = mediaMetadataRetriever.getFrameAtTime(
+                1000000,
+                MediaMetadataRetriever.OPTION_CLOSEST_SYNC
+            )
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        } finally {
+            mediaMetadataRetriever?.release()
+        }
+        return bitmap
     }
 }
