@@ -1,7 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
-        <item name="android:timePickerMode">spinner</item>
-    </style>
     <!-- Base application theme. -->
     <style name="Theme.AndroidEL" parent="Theme.AppCompat.Light">
         <item name="windowNoTitle">true</item>
@@ -16,8 +13,5 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-
-        <!-- TimePicker 종류 변경 -->
-        <item name="android:timePickerStyle">@style/MyTimePickerTheme</item>
     </style>
 </resources>

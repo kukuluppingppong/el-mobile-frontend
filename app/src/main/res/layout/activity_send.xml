@@ -14,11 +14,14 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/today"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="30sp"
+            android:textColor="@color/black"
             android:text="2020년 7월 25일"/>
 
     </LinearLayout>
@@ -27,28 +30,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:paddingHorizontal="12dp"
-        android:paddingVertical="8dp"
-        android:background="@drawable/bg_f8f9fc_radius_16"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="5dp"
+        android:background="@drawable/bg_blue_10"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnExercise"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
-            android:layout_marginRight="8dp"
             android:background="@drawable/btn_send"
             android:textStyle="bold"
+            android:textColor="@drawable/btn_send"
             android:text="운동" />
 
         <Button
             android:id="@+id/btnFood"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@drawable/btn_send"
             android:textStyle="bold"
+            android:textColor="@drawable/btn_send"
             android:text="식단" />
 
     </LinearLayout>
@@ -64,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="invisible">
+            android:visibility="visible">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -81,11 +85,11 @@
             <EditText
                 android:id="@+id/edtOpinion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_marginHorizontal="10dp"
                 android:background="@drawable/edt_f1"
                 android:paddingHorizontal="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:textSize="16sp"
                 android:lines="2"
                 android:hint="오늘 한 운동에 대해 알려주세요!"
@@ -95,14 +99,15 @@
         </LinearLayout>
 
         <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="invisible">
 
             <LinearLayout
                 android:id="@+id/foodLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -112,32 +117,77 @@
                     android:paddingVertical="8dp"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/btnFood1"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/btn_f1"
-                        android:src="@drawable/ic_plus"/>
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/btn_f1">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/btnFood1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/btn_f1"
+                                android:src="@drawable/ic_add"/>
+
+                            <TextView
+                                android:id="@+id/text1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"
+                                android:layout_marginTop="20dp"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:text="사진 추가"/>
+
+                        </FrameLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:text="아침"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:text="아침"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                            <ImageButton
+                                android:id="@+id/btnRecord"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:padding="8dp"
+                                android:background="@drawable/btn_d5d6d6_10"
+                                android:src="@drawable/ic_pen_edit" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -145,13 +195,12 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
-                                android:text="시간 : "/>
+                                android:text="시간  "/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="13:00"/>
                         </LinearLayout>
 
@@ -166,13 +215,12 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
-                                android:text="식사량 : "/>
+                                android:text="식사량  "/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="배고픔"/>
                         </LinearLayout>
 
@@ -213,32 +261,78 @@
                     android:paddingVertical="8dp"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/btnFood2"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/btn_f1"
-                        android:src="@drawable/ic_plus"/>
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/btn_f1">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/btnFood2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/btn_f1"
+                                android:src="@drawable/ic_add"/>
+
+                            <TextView
+                                android:id="@+id/text2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"
+                                android:layout_marginTop="20dp"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:text="사진 추가"/>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:text="점심"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:text="점심"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                            <ImageButton
+                                android:id="@+id/btnRecord2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:padding="8dp"
+                                android:background="@drawable/btn_d5d6d6_10"
+                                android:src="@drawable/ic_pen_edit" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -251,8 +345,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="13:00"/>
                         </LinearLayout>
 
@@ -272,8 +365,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="배고픔"/>
                         </LinearLayout>
 
@@ -314,32 +406,78 @@
                     android:paddingVertical="8dp"
                     android:orientation="horizontal">
 
-                    <ImageButton
-                        android:id="@+id/btnFood3"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="150dp"
                         android:layout_weight="1"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/btn_f1"
-                        android:src="@drawable/ic_plus"/>
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/btn_f1">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageButton
+                                android:id="@+id/btnFood3"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/btn_f1"
+                                android:src="@drawable/ic_add"/>
+
+                            <TextView
+                                android:id="@+id/text3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="visible"
+                                android:layout_marginTop="20dp"
+                                android:layout_gravity="center"
+                                android:textStyle="bold"
+                                android:text="사진 추가"/>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
-                            android:text="저녁"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:text="저녁"/>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"/>
+
+                            <ImageButton
+                                android:id="@+id/btnRecord3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="right"
+                                android:padding="8dp"
+                                android:background="@drawable/btn_d5d6d6_10"
+                                android:src="@drawable/ic_pen_edit" />
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -347,13 +485,12 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
-                                android:text="시간 : "/>
+                                android:text="시간  "/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="13:00"/>
                         </LinearLayout>
 
@@ -368,13 +505,12 @@
                                 android:layout_height="wrap_content"
                                 android:textStyle="bold"
                                 android:textSize="16sp"
-                                android:text="식사량 : "/>
+                                android:text="식사량  "/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 android:text="배고픔"/>
                         </LinearLayout>
 

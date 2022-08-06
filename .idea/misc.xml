@@ -5,15 +5,22 @@
       <map>
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable-v24/bg_f8f9fc_radius_16.xml" value="0.1535" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/asd.xml" value="0.1" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_blue_radius_10.xml" value="0.15" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_ee_radius_16.xml" value="0.15" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_f8f9fc_radius_16.xml" value="0.1535" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_blue_65.xml" value="0.1535" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_d5d6d6_10.xml" value="0.15" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_day.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_day_normal.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_day_selected.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_dddada_10.xml" value="0.1535" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_dialog.xml" value="0.1355" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_dialog_normal.xml" value="0.15" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_dialog_selected.xml" value="0.15" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_eee_65.xml" value="0.1655" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_f1.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_f1_20.xml" value="0.1655" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_part.xml" value="0.15" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_send.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_send_normal.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_send_select.xml" value="0.1" />
@@ -47,7 +54,7 @@
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_trainer.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_trainer_again.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_welcome.xml" value="0.21422101449275363" />
-        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/send_dialog.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/send_dialog.xml" value="0.2" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/send_item_view.xml" value="0.4" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/trainer_item_view.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.107" />

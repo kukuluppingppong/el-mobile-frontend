@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -20,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.databinding.ActivitySendBinding
+import java.time.LocalDate
 
 
 class SendActivity : AppCompatActivity() {
@@ -38,19 +38,24 @@ class SendActivity : AppCompatActivity() {
 
         initImageViewProfile()
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            var date = LocalDate.now()
+            binding.today.text = String.format("%d년 %d월 %d일", date.year, date.monthValue, date.dayOfMonth)
+        }
+
         binding.btnExercise.isSelected = true
 
         binding.btnExercise.setOnClickListener {
             binding.btnExercise.isSelected = true
             binding.btnFood.isSelected = false
-            binding.foodLayout.visibility = View.INVISIBLE
+            binding.scrollView2.visibility = View.INVISIBLE
             binding.exerciseLayout.visibility = View.VISIBLE
         }
 
         binding.btnFood.setOnClickListener {
             binding.btnExercise.isSelected = false
             binding.btnFood.isSelected = true
-            binding.foodLayout.visibility = View.VISIBLE
+            binding.scrollView2.visibility = View.VISIBLE
             binding.exerciseLayout.visibility = View.INVISIBLE
         }
 
@@ -111,9 +116,18 @@ class SendActivity : AppCompatActivity() {
                         val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
                         val bitmap = ImageDecoder.decodeBitmap(source)
                         when (btnSelect) {
-                            1 -> binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
-                            2 -> binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
-                            3 -> binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                            1 -> {
+                                binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                                binding.text1.visibility = View.GONE
+                            }
+                            2 -> {
+                                binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                                binding.text2.visibility = View.GONE
+                            }
+                            3 -> {
+                                binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
+                                binding.text3.visibility = View.GONE
+                            }
                         }
                     }
                 }catch(e: Exception)

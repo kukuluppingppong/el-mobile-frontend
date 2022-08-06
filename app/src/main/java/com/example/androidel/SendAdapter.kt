@@ -1,7 +1,9 @@
 package com.example.androidel
 
+import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
@@ -9,10 +11,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidel.databinding.SendDialogBinding
 
 class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.ViewHolder>() {
     private var imageUriList: List<Uri> = listOf()
@@ -31,7 +33,88 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.record.setOnClickListener {
+            lateinit var btnPart : ArrayList<Button>
+            var choiceButton = ArrayList<String>()
+            var choiceMaxSize = 4
 
+            lateinit var btnStrong : ArrayList<Button>
+            var choiceStrength = ArrayList<String>()
+            var choiceMaxStrength = 1
+
+            var dialogView = View.inflate(context, R.layout.send_dialog, null)
+            var dlg = AlertDialog.Builder(context).create()
+            dlg.setView(dialogView)
+            dlg.show()
+
+            var body = dialogView.findViewById<Button>(R.id.body)
+            var arm = dialogView.findViewById<Button>(R.id.arm)
+            var abs = dialogView.findViewById<Button>(R.id.abs)
+            var lower = dialogView.findViewById<Button>(R.id.lower)
+            var back = dialogView.findViewById<Button>(R.id.back)
+            var shoulder = dialogView.findViewById<Button>(R.id.shoulder)
+            var chest = dialogView.findViewById<Button>(R.id.chest)
+            var waist = dialogView.findViewById<Button>(R.id.waist)
+            var hip = dialogView.findViewById<Button>(R.id.hip)
+
+            btnPart = arrayListOf(body, arm, abs, lower, back, shoulder, chest, waist, hip)
+
+            for (i in btnPart.indices) {
+                btnPart[i].setOnClickListener {
+                    if (choiceButton.size < choiceMaxSize) {
+                        if (!btnPart[i].isSelected) {
+                            btnPart[i].isSelected = true
+                            choiceButton.add(btnPart[i].text.toString())
+                        } else {
+                            btnPart[i].isSelected = false
+                            choiceButton.removeAt(choiceButton.indexOf(btnPart[i].text.toString()))
+                        }
+                    } else {
+                        if (btnPart[i].isSelected) {
+                            btnPart[i].isSelected = false
+                            choiceButton.removeAt(choiceButton.indexOf(btnPart[i].text.toString()))
+                        }
+                    }
+                }
+            }
+
+            var set = dialogView.findViewById<EditText>(R.id.set)
+            var number = dialogView.findViewById<EditText>(R.id.number)
+
+            var hard = dialogView.findViewById<Button>(R.id.hard)
+            var normal = dialogView.findViewById<Button>(R.id.normal)
+            var easy = dialogView.findViewById<Button>(R.id.easy)
+
+            btnStrong = arrayListOf(hard, normal, easy)
+
+            for (i in btnStrong.indices) {
+                btnStrong[i].setOnClickListener {
+                    if (choiceStrength.size < choiceMaxStrength) {
+                        if (!btnStrong[i].isSelected) {
+                            btnStrong[i].isSelected = true
+                            choiceStrength.add(btnStrong[i].text.toString())
+                        } else {
+                            btnStrong[i].isSelected = false
+                            choiceStrength.removeAt(choiceStrength.indexOf(btnStrong[i].text.toString()))
+                        }
+                    } else {
+                        if (btnStrong[i].isSelected) {
+                            btnStrong[i].isSelected = false
+                            choiceStrength.removeAt(choiceStrength.indexOf(btnStrong[i].text.toString()))
+                        }
+                    }
+                }
+            }
+
+            var btnSave = dialogView.findViewById<Button>(R.id.btnSave)
+
+            btnSave.setOnClickListener {
+                holder.itemPart.text = choiceButton.joinToString(", ")
+                holder.itemSet.text = set.text
+                holder.itemNumber.text = number.text
+                holder.itemStrength.text = choiceStrength.joinToString()
+
+                dlg.dismiss()
+            }
         }
 
         if (imageUriOne != null && position == select) {
@@ -40,12 +123,13 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
                 holder.video.width,
                 holder.video.height,
                 false))
+            holder.text.visibility = View.GONE
         }
 
         if(imageUriList.isNotEmpty() && position < imageUriList.size) {
             holder.video.setImageBitmap(Bitmap.createScaledBitmap(
                 createThumbnail(context, imageUriList[position].toString())!!, holder.video.width, holder.video.height, false))
-
+            holder.text.visibility = View.GONE
             if (position == count-1) {
                 this.imageUriList = listOf()
             }
@@ -64,7 +148,13 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val video = itemView.findViewById<ImageButton>(R.id.btnVideo)
-        val record = itemView.findViewById<Button>(R.id.btnRecord)
+        val text = itemView.findViewById<TextView>(R.id.text)
+        val record = itemView.findViewById<ImageButton>(R.id.btnRecord)
+
+        val itemPart = itemView.findViewById<TextView>(R.id.itemPart)
+        val itemSet = itemView.findViewById<TextView>(R.id.itemSet)
+        val itemNumber = itemView.findViewById<TextView>(R.id.itemNumber)
+        val itemStrength = itemView.findViewById<TextView>(R.id.itemStrength)
     }
 
     fun setVideoList(videoUriList: List<Uri>) {

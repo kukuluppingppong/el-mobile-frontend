@@ -6,50 +6,76 @@
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp">
 
-    <ImageButton
-        android:id="@+id/btnVideo"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="150dp"
         android:layout_weight="1"
         android:layout_marginRight="8dp"
-        android:background="@drawable/btn_f1"
-        android:src="@drawable/ic_plus"/>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/btn_f1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/btnVideo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_f1"
+                android:src="@drawable/ic_add"/>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="영상 추가"/>
+
+        </FrameLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_gravity="center"
         android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:text="운동 부위 : "/>
+                android:text="운동 부위  "/>
 
-            <TextView
-                android:id="@+id/part"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="전신"/>
-
-            <Button
+            <ImageButton
                 android:id="@+id/btnRecord"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                android:text="버튼"/>
+                android:layout_gravity="right"
+                android:padding="8dp"
+                android:background="@drawable/btn_d5d6d6_10"
+                android:src="@drawable/ic_pen_edit" />
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/itemPart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textSize="14sp"
+                android:text="전신, 팔, 복근, 하체"/>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -62,14 +88,13 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:text="세트 수 : "/>
+                android:text="세트 수  "/>
 
             <TextView
-                android:id="@+id/set"
+                android:id="@+id/itemSet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="3"/>
         </LinearLayout>
 
@@ -84,14 +109,13 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:text="세트 당 횟수 : "/>
+                android:text="세트 당 횟수  "/>
 
             <TextView
-                android:id="@+id/number"
+                android:id="@+id/itemNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="15"/>
         </LinearLayout>
 
@@ -106,43 +130,14 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="16sp"
-                android:text="운동 강도 : "/>
+                android:text="운동 강도  "/>
 
             <TextView
-                android:id="@+id/strength"
+                android:id="@+id/itemStrength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:hint="매우 힘듦"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:text="점수"/>
-
-            <RatingBar
-                android:id="@+id/score"
-                style="@style/Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:isIndicator="false"
-                android:numStars="5"
-                android:progressTint="#98bffd"
-                android:rating="0"
-                android:stepSize="1" />
-
         </LinearLayout>
     </LinearLayout>
 
