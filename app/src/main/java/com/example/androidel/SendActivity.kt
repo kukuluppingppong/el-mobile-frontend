@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -82,6 +82,65 @@ class SendActivity : AppCompatActivity() {
         binding.btnFood3.setOnClickListener {
             btnSelect = 3
             navigateGallery()
+        }
+
+        var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)
+
+        for (i in record.indices) {
+            record[i].setOnClickListener {
+                lateinit var btnIntake : ArrayList<Button>
+                var choiceIntake = ArrayList<String>()
+                var choiceMaxIntake = 1
+
+                var dialogView = View.inflate(this, R.layout.send_food_dialog, null)
+                var dlg = AlertDialog.Builder(this).create()
+                dlg.setView(dialogView)
+                dlg.show()
+
+                var hour = dialogView.findViewById<EditText>(R.id.hour)
+                var minute = dialogView.findViewById<EditText>(R.id.minute)
+
+                var lightly = dialogView.findViewById<Button>(R.id.lightly)
+                var moderately = dialogView.findViewById<Button>(R.id.moderately)
+                var full = dialogView.findViewById<Button>(R.id.full)
+
+                btnIntake = arrayListOf(lightly, moderately, full)
+
+                for (i in btnIntake.indices) {
+                    btnIntake[i].setOnClickListener {
+                        if (choiceIntake.size < choiceMaxIntake) {
+                            if (!btnIntake[i].isSelected) {
+                                btnIntake[i].isSelected = true
+                                choiceIntake.add(btnIntake[i].text.toString())
+                            } else {
+                                btnIntake[i].isSelected = false
+                                choiceIntake.removeAt(choiceIntake.indexOf(btnIntake[i].text.toString()))
+                            }
+                        } else {
+                            if (btnIntake[i].isSelected) {
+                                btnIntake[i].isSelected = false
+                                choiceIntake.removeAt(choiceIntake.indexOf(btnIntake[i].text.toString()))
+                            }
+                        }
+                    }
+                }
+
+                var dialogRatingBar = dialogView.findViewById<RatingBar>(R.id.ratingBar)
+
+                var btnSave = dialogView.findViewById<Button>(R.id.btnSave)
+
+                var time = arrayListOf(binding.time1, binding.time2, binding.time3)
+                var intake = arrayListOf(binding.intake1, binding.intake2, binding.intake3)
+                var ratingBar = arrayListOf(binding.ratingBar1, binding.ratingBar2, binding.ratingBar3)
+
+                btnSave.setOnClickListener {
+                    time[i].text = "${hour.text}:${minute.text}"
+                    intake[i].text = choiceIntake.joinToString()
+                    ratingBar[i].rating = dialogRatingBar.rating
+
+                    dlg.dismiss()
+                }
+            }
         }
 
 

@@ -175,7 +175,7 @@
                                 android:layout_weight="1"/>
 
                             <ImageButton
-                                android:id="@+id/btnRecord"
+                                android:id="@+id/btnRecord1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
@@ -198,6 +198,7 @@
                                 android:text="시간  "/>
 
                             <TextView
+                                android:id="@+id/time1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -218,6 +219,7 @@
                                 android:text="식사량  "/>
 
                             <TextView
+                                android:id="@+id/intake1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -244,7 +246,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:isIndicator="false"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="#98bffd"
                                 android:rating="0"
@@ -343,6 +345,7 @@
                                 android:text="시간 : "/>
 
                             <TextView
+                                android:id="@+id/time2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -363,6 +366,7 @@
                                 android:text="식사량 : "/>
 
                             <TextView
+                                android:id="@+id/intake2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -389,7 +393,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:isIndicator="false"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="#98bffd"
                                 android:rating="0"
@@ -488,6 +492,7 @@
                                 android:text="시간  "/>
 
                             <TextView
+                                android:id="@+id/time3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -508,6 +513,7 @@
                                 android:text="식사량  "/>
 
                             <TextView
+                                android:id="@+id/intake3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="14sp"
@@ -534,7 +540,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="5dp"
-                                android:isIndicator="false"
+                                android:isIndicator="true"
                                 android:numStars="5"
                                 android:progressTint="#98bffd"
                                 android:rating="0"

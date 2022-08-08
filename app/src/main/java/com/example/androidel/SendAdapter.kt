@@ -3,7 +3,6 @@ package com.example.androidel
 import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
@@ -11,10 +10,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidel.databinding.SendDialogBinding
 
 class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.ViewHolder>() {
     private var imageUriList: List<Uri> = listOf()
@@ -41,7 +42,7 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
             var choiceStrength = ArrayList<String>()
             var choiceMaxStrength = 1
 
-            var dialogView = View.inflate(context, R.layout.send_dialog, null)
+            var dialogView = View.inflate(context, R.layout.send_exercise_dialog, null)
             var dlg = AlertDialog.Builder(context).create()
             dlg.setView(dialogView)
             dlg.show()
