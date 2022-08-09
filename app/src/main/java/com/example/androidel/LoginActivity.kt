@@ -24,5 +24,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
+
+        binding.btnFace.setOnClickListener {
+            var intent = Intent(applicationContext, RecordActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 }
