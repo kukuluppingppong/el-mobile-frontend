@@ -35,7 +35,7 @@ class CalendarAdapter(val dayList: ArrayList<String>): RecyclerView.Adapter<Cale
                     selectedText = holder.dayText
                     total -= 1
                 }
-                // holder.dayText.setBackgroundResource(R.drawable.record_calendar_round_button)
+                holder.dayText.setBackgroundResource(R.drawable.record_round_button)
                 holder.dayText.setTextColor(Color.WHITE)
                 total += 1
             }

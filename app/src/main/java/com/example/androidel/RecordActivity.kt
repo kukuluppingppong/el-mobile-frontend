@@ -3,6 +3,7 @@ package com.example.androidel
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +23,8 @@ class RecordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.btnExercise.isSelected = true
+
         selectedDate = LocalDate.now()
 
         setMonthView()
@@ -35,6 +38,22 @@ class RecordActivity : AppCompatActivity() {
             selectedDate = selectedDate.plusMonths(1)
             setMonthView()
         }
+
+        binding.btnExercise.setOnClickListener {
+            binding.btnExercise.isSelected = true
+            binding.btnFood.isSelected = false
+            binding.foodLayout.visibility = View.INVISIBLE
+            binding.exerciseLayout.visibility = View.VISIBLE
+        }
+
+        binding.btnFood.setOnClickListener {
+            binding.btnExercise.isSelected = false
+            binding.btnFood.isSelected = true
+            binding.foodLayout.visibility = View.VISIBLE
+            binding.exerciseLayout.visibility = View.INVISIBLE
+        }
+
+
     }
 
     // 형식 변환

@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable-v24/bg_f8f9fc_radius_16.xml" value="0.1535" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/asd.xml" value="0.1" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_blue_10.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_blue_radius_10.xml" value="0.15" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_ee_radius_16.xml" value="0.15" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_f1_20.xml" value="0.134" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/bg_f8f9fc_radius_16.xml" value="0.1535" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_blue_65.xml" value="0.1535" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/btn_d5d6d6_10.xml" value="0.15" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/ic_unhide.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/login_button.xml" value="0.1385" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/ratingbar.xml" value="0.1" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/record_round_button.xml" value="0.154" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/send_video_f1.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/send_video_f1_plus.xml" value="0.1" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/drawable/trainer_round_10.xml" value="0.107" />
@@ -50,7 +53,7 @@
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_join.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_record.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_record.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_send.xml" value="0.2" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_trainer.xml" value="0.264" />
         <entry key="..\:/Users/BEAK/AndroidStudioProjects/AndroidEL/app/src/main/res/layout/activity_trainer_again.xml" value="0.25364583333333335" />
