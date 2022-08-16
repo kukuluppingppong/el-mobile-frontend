@@ -228,6 +228,7 @@
                         android:src="@drawable/record_check"/>
 
                     <TextView
+                        android:id="@+id/exercise1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="종아리 스트레칭"/>
@@ -279,6 +280,7 @@
                         android:src="@drawable/record_check"/>
 
                     <TextView
+                        android:id="@+id/exercise2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="종아리 스트레칭"/>
@@ -330,6 +332,7 @@
                         android:src="@drawable/record_check"/>
 
                     <TextView
+                        android:id="@+id/exercise3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="종아리 스트레칭"/>
@@ -381,6 +384,7 @@
                         android:src="@drawable/record_check"/>
 
                     <TextView
+                        android:id="@+id/exercise4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="종아리 스트레칭"/>
@@ -432,6 +436,7 @@
                         android:src="@drawable/record_check"/>
 
                     <TextView
+                        android:id="@+id/exercise5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="종아리 스트레칭"/>

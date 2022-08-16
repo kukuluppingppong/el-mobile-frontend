@@ -53,6 +53,11 @@ class RecordActivity : AppCompatActivity() {
             binding.exerciseLayout.visibility = View.INVISIBLE
         }
 
+        binding.exercise1.setOnClickListener {
+            val dlg = RecordDialogActivity(this)
+            dlg.show()
+        }
+
 
     }
 
