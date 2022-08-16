@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.databinding.ActivityTrainerBinding
+import com.example.androidel.model.TrainerItemModel
 
 class TrainerActivity : AppCompatActivity() {
     val binding by lazy { ActivityTrainerBinding.inflate(layoutInflater) }
@@ -15,12 +16,12 @@ class TrainerActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var trainerList = arrayListOf(
-            TrainerDataClass( R.drawable.sample, "홍길동", "월요일", "14:00~15:00", false),
-            TrainerDataClass( R.drawable.sample, "홍동길", "화요일", "14:00~15:00", false),
-            TrainerDataClass( R.drawable.sample, "123", "수요일", "14:00~15:00", false),
-            TrainerDataClass( R.drawable.sample, "135324", "목요일", "14:00~15:00", false),
-            TrainerDataClass( R.drawable.sample, "13242", "금요일", "14:00~15:00", false),
-            TrainerDataClass( R.drawable.sample, "124321124", "토요일", "14:00~15:00", false))
+            TrainerItemModel( R.drawable.sample, "홍길동", "남자", "1년"),
+            TrainerItemModel( R.drawable.sample, "홍동길", "남자", "2년"),
+            TrainerItemModel( R.drawable.sample, "홍길동", "남자", "1년"),
+            TrainerItemModel( R.drawable.sample, "홍길동", "남자", "4년"),
+            TrainerItemModel( R.drawable.sample, "홍길동아", "남자", "5년"),
+            TrainerItemModel( R.drawable.sample, "홍길동후", "남자", "1년"))
 
 
         trainerAdapter = TrainerAdapter(trainerList)
