@@ -1,5 +1,8 @@
 package com.example.androidel.model
 
-class TrainerListModel {
-    var trainer: MutableList<TrainerItemModel>? = null
-}
+import com.google.gson.annotations.SerializedName
+
+data class TrainerListModel (
+    @SerializedName("data")
+    val trainer: MutableList<TrainerItemModel>
+)

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidel.model.TrainerItemModel
 
 
-class TrainerAdapter(private val trainerList: ArrayList<TrainerItemModel>): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
+class TrainerAdapter(private val trainerList: MutableList<TrainerItemModel>?): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
     private var selectBox: CheckBox? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,10 +20,9 @@ class TrainerAdapter(private val trainerList: ArrayList<TrainerItemModel>): Recy
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
-            image.setImageResource(trainerList[position].image)
-            name.text = trainerList[position].name
-            gender.text = trainerList[position].gender
-            time.text = trainerList[position].time
+            name.text = trainerList?.get(position)?.name ?: ""
+            gender.text = trainerList?.get(position)?.gender ?: ""
+            time.text = trainerList?.get(position)?.award ?: ""
 
             checkBox.setOnClickListener {
                 if (selectBox != null) {
@@ -35,7 +34,7 @@ class TrainerAdapter(private val trainerList: ArrayList<TrainerItemModel>): Recy
     }
 
     override fun getItemCount(): Int {
-        return trainerList.size
+        return trainerList!!.size
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {

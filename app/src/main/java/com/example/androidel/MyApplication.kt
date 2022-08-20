@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MyApplication: Application() {
 
     companion object {
-        val BASE_URL = "http://ec2-52-78-26-68.ap-northeast-2.compute.amazonaws.com:8080/api"
+        val BASE_URL = "http://ec2-52-78-26-68.ap-northeast-2.compute.amazonaws.com:8080/"
 
         var networkService: NetworkService
         val retrofit: Retrofit
