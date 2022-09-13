@@ -20,25 +20,25 @@ class TrainerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val call: Call<TrainerListModel> = MyApplication.networkService.getTrainerList()
-
-        call?.enqueue(object: Callback<TrainerListModel> {
-            override fun onResponse(
-                call: Call<TrainerListModel>,
-                response: Response<TrainerListModel>,
-            ) {
-                if (response.isSuccessful) {
-                    Log.e("태그", response.body()?.trainer.toString())
-                    trainerAdapter = TrainerAdapter(response.body()?.trainer)
-                    binding.recyclerView.adapter = trainerAdapter
-                    binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-                }
-            }
-
-            override fun onFailure(call: Call<TrainerListModel>, t: Throwable) {
-                Log.e("태그", t.toString())
-            }
-        })
+//        val call: Call<TrainerListModel> = MyApplication.networkService.getTrainerList()
+//
+//        call?.enqueue(object: Callback<TrainerListModel> {
+//            override fun onResponse(
+//                call: Call<TrainerListModel>,
+//                response: Response<TrainerListModel>,
+//            ) {
+//                if (response.isSuccessful) {
+//                    Log.e("태그", response.body()?.trainer.toString())
+//                    trainerAdapter = TrainerAdapter(response.body()?.trainer)
+//                    binding.recyclerView.adapter = trainerAdapter
+//                    binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<TrainerListModel>, t: Throwable) {
+//                Log.e("태그", t.toString())
+//            }
+//        })
 
 
 //        var trainerList = arrayListOf(

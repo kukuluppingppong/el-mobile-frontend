@@ -1,4 +1,4 @@
-package com.example.androidel.model
+package com.example.androidel.login.models
 
 data class LoginResponse(
     val id: String,
