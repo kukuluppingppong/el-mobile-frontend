@@ -6,8 +6,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface LoginService {
-//    @GET("api/training")
-//    fun getTrainerList(): Call<TrainerListModel>
     @POST("api/users/login")
     fun login(@Body params: LoginResponse): Call<LoginResult>
 }

@@ -9,6 +9,7 @@ import com.example.androidel.*
 import com.example.androidel.databinding.ActivityLoginBinding
 import com.example.androidel.login.models.LoginResponse
 import com.example.androidel.login.models.LoginResult
+import com.example.androidel.signUp.SignUpActivity
 import com.example.androidel.trainer.TrainerActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.joinButton.setOnClickListener {
-            val intent = Intent(applicationContext, JoinActivity::class.java)
+            val intent = Intent(applicationContext, SignUpActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }

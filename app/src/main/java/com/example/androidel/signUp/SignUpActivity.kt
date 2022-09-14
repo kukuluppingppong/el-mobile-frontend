@@ -1,16 +1,18 @@
-package com.example.androidel
+package com.example.androidel.signUp
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.HideReturnsTransformationMethod
-import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.androidel.MyApplication
 import com.example.androidel.databinding.ActivityJoinBinding
-import com.example.androidel.databinding.ActivityLoginBinding
-import java.util.regex.Pattern
+import com.example.androidel.signUp.model.SignUpBody
+import com.example.androidel.signUp.model.SignUpResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class JoinActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
     val binding by lazy { ActivityJoinBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,9 +98,30 @@ class JoinActivity : AppCompatActivity() {
 
         // 유효성 검사 완료 -> 보류
         binding.btnJoin.setOnClickListener {
-            val intent = Intent(applicationContext, BasicActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
+            val idStr = binding.editId.text.toString()
+            val pwStr = binding.editPw.text.toString()
+            val name = binding.edtName.text.toString()
+            val phoneNumber = binding.edtNumber.text.toString()
+
+            val call: Call<SignUpResponse> = MyApplication.signUpService.signUp(SignUpBody(idStr, name, pwStr, phoneNumber))
+            call?.enqueue(object: Callback<SignUpResponse> {
+                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
+                    val result = response.body()
+//                    Log.e("태그", "$result")
+                    if (result == null) {
+                        Toast.makeText(this@SignUpActivity, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                    }
+                    if (response.isSuccessful) {
+//                        val intent = Intent(applicationContext, BasicActivity::class.java)
+//                        startActivity(intent)
+//                        overridePendingTransition(0, 0)
+                    }
+                }
+
+                override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+                    Log.e("태그", t.toString())
+                }
+            })
         }
     }
 }

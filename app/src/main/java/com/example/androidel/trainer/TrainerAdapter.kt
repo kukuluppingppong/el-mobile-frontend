@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidel.R
 import com.example.androidel.trainer.model.TrainerItemModel
 
-
 class TrainerAdapter(private val trainerList: MutableList<TrainerItemModel>?): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
     private var selectBox: CheckBox? = null
 
