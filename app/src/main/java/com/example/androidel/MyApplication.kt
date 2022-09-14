@@ -4,9 +4,12 @@ import android.app.Application
 import com.example.androidel.login.AuthInterceptor
 import com.example.androidel.login.Prefs
 import com.example.androidel.login.interfaces.LoginService
+import com.example.androidel.trainer.interfaces.TrainerService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+const val BASE_URL = "http://ec2-13-125-255-47.ap-northeast-2.compute.amazonaws.com:8080/"
 
 class MyApplication: Application() {
     override fun onCreate() {
@@ -17,10 +20,10 @@ class MyApplication: Application() {
     companion object {
         lateinit var prefs: Prefs
 
-        val BASE_URL = "http://ec2-13-125-255-47.ap-northeast-2.compute.amazonaws.com:8080/"
-        val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
+        private val okHttpClient = OkHttpClient.Builder().addInterceptor(AuthInterceptor()).build()
 
-        var networkService: LoginService
+        var loginService: LoginService
+        var trainerService: TrainerService
 
         val retrofit: Retrofit
             get() = Retrofit.Builder()
@@ -30,7 +33,8 @@ class MyApplication: Application() {
                 .build()
 
         init {
-            networkService = retrofit.create(LoginService::class.java)
+            loginService = retrofit.create(LoginService::class.java)
+            trainerService = retrofit.create(TrainerService::class.java)
         }
     }
 }

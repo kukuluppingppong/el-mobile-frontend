@@ -2,9 +2,9 @@ package com.example.androidel
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidel.databinding.ActivityBasicBinding
+import com.example.androidel.trainer.TrainerActivity
 
 class BasicActivity : AppCompatActivity() {
     val binding by lazy { ActivityBasicBinding.inflate(layoutInflater) }

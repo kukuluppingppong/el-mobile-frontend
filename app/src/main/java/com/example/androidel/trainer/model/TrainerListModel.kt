@@ -1,4 +1,4 @@
-package com.example.androidel.model
+package com.example.androidel.trainer.model
 
 import com.google.gson.annotations.SerializedName
 

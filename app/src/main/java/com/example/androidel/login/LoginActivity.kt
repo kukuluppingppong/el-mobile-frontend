@@ -5,13 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidel.JoinActivity
-import com.example.androidel.MyApplication
-import com.example.androidel.RecordActivity
-import com.example.androidel.SendActivity
+import com.example.androidel.*
 import com.example.androidel.databinding.ActivityLoginBinding
 import com.example.androidel.login.models.LoginResponse
 import com.example.androidel.login.models.LoginResult
+import com.example.androidel.trainer.TrainerActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
             val idStr = binding.editId.text.toString()
             val pwStr = binding.editPw.text.toString()
 
-            val call: Call<LoginResult> = MyApplication.networkService.login(LoginResponse(idStr, pwStr))
+            val call: Call<LoginResult> = MyApplication.loginService.login(LoginResponse(idStr, pwStr))
 
             call?.enqueue(object: Callback<LoginResult> {
                 override fun onResponse(
@@ -58,6 +56,10 @@ class LoginActivity : AppCompatActivity() {
                         MyApplication.prefs.token = response.body()!!.data.token
                         Log.e("태그", response.toString())
                         Log.e("태그", MyApplication.prefs.token!!)
+                        val intent = Intent(applicationContext, TrainerActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                        overridePendingTransition(0, 0)
                     } else {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }

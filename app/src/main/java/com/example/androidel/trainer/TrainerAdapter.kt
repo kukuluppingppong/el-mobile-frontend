@@ -1,4 +1,4 @@
-package com.example.androidel
+package com.example.androidel.trainer
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidel.model.TrainerItemModel
+import com.example.androidel.R
+import com.example.androidel.trainer.model.TrainerItemModel
 
 
 class TrainerAdapter(private val trainerList: MutableList<TrainerItemModel>?): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {

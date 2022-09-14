@@ -28,7 +28,7 @@
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".TrainerActivity"
+            android:name=".trainer.TrainerActivity"
             android:exported="false" />
         <activity
             android:name=".BasicActivity"
