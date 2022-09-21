@@ -1,5 +1,6 @@
 package com.example.androidel.trainer
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.androidel.trainer.model.TrainerItemModel
 
 class TrainerAdapter(private val trainerList: MutableList<TrainerItemModel>?): RecyclerView.Adapter<TrainerAdapter.ViewHolder>() {
     private var selectBox: CheckBox? = null
+    var trainerId: Int? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.trainer_item_view, parent, false)
@@ -29,6 +31,11 @@ class TrainerAdapter(private val trainerList: MutableList<TrainerItemModel>?): R
                     selectBox!!.isChecked = false
                 }
                 selectBox = checkBox
+                if (checkBox.isChecked) {
+                   trainerId = trainerList?.get(position)?.trainerId
+                } else {
+                    trainerId = null
+                }
             }
         }
     }
