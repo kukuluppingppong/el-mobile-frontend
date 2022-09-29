@@ -1,15 +1,15 @@
 package com.example.androidel.trainer
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.MyApplication
-import com.example.androidel.WelcomeActivity
 import com.example.androidel.databinding.ActivityTrainerBinding
 import com.example.androidel.trainer.model.TrainerJoinResponse
 import com.example.androidel.trainer.model.TrainerListModel
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,9 +51,15 @@ class TrainerActivity : AppCompatActivity() {
                     call: Call<TrainerJoinResponse>,
                     response: Response<TrainerJoinResponse>,
                 ) {
-                    Log.e("TrainerActivity2", response.body().toString())
+                    var result = response.body()
+                    Log.e("태그", result.toString())
+                    if (result == null) {
+                        var jsonObject = JSONObject(response.errorBody()!!.string())
+                        val message = jsonObject.getString("message")
+                        Toast.makeText(this@TrainerActivity, message, Toast.LENGTH_SHORT).show()
+                    }
                     if (response.isSuccessful) {
-
+                        Toast.makeText(this@TrainerActivity, "매칭 성공", Toast.LENGTH_SHORT).show()
 //                    var intent = Intent(applicationContext, WelcomeActivity::class.java)
 //                    startActivity(intent)
 //                    overridePendingTransition(0, 0)

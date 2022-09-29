@@ -1,16 +1,20 @@
 package com.example.androidel.signUp
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.androidel.BasicActivity
 import com.example.androidel.MyApplication
 import com.example.androidel.databinding.ActivityJoinBinding
 import com.example.androidel.signUp.model.SignUpBody
 import com.example.androidel.signUp.model.SignUpResponse
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class SignUpActivity : AppCompatActivity() {
     val binding by lazy { ActivityJoinBinding.inflate(layoutInflater) }
@@ -106,15 +110,17 @@ class SignUpActivity : AppCompatActivity() {
             val call: Call<SignUpResponse> = MyApplication.signUpService.signUp(SignUpBody(idStr, name, pwStr, phoneNumber))
             call?.enqueue(object: Callback<SignUpResponse> {
                 override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                    val result = response.body()
-//                    Log.e("태그", "$result")
+                    var result = response.body()
+
                     if (result == null) {
-                        Toast.makeText(this@SignUpActivity, "회원가입 실패", Toast.LENGTH_SHORT).show()
+                        var jsonObject = JSONObject(response.errorBody()!!.string())
+                        val message = jsonObject.getString("message")
+                        Toast.makeText(this@SignUpActivity, message, Toast.LENGTH_SHORT).show()
                     }
                     if (response.isSuccessful) {
-//                        val intent = Intent(applicationContext, BasicActivity::class.java)
-//                        startActivity(intent)
-//                        overridePendingTransition(0, 0)
+                        val intent = Intent(applicationContext, BasicActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
                     }
                 }
 
