@@ -36,8 +36,6 @@ class SendActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initImageViewProfile()
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var date = LocalDate.now()
             binding.today.text = String.format("%d년 %d월 %d일", date.year, date.monthValue, date.dayOfMonth)
@@ -61,7 +59,7 @@ class SendActivity : AppCompatActivity() {
 
         sendAdapter = SendAdapter(
             onClick = {
-                navigateVideo()
+                initImageViewProfile { navigateVideo() }
             }
         )
 
@@ -71,17 +69,17 @@ class SendActivity : AppCompatActivity() {
 
         binding.btnFood1.setOnClickListener {
             btnSelect = 1
-            navigateGallery()
+            initImageViewProfile { navigateGallery() }
         }
 
         binding.btnFood2.setOnClickListener {
             btnSelect = 2
-            navigateGallery()
+            initImageViewProfile { navigateGallery() }
         }
 
         binding.btnFood3.setOnClickListener {
             btnSelect = 3
-            navigateGallery()
+            initImageViewProfile { navigateGallery() }
         }
 
         var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)
@@ -256,12 +254,13 @@ class SendActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun initImageViewProfile() {
+    private fun initImageViewProfile(uploadAction: () -> Unit) {
         when {
             // 갤러리 접근 권한이 있는 경우
             ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> {
+                uploadAction()
             }
 
             // 갤러리 접근 권한이 없는 경우 & 교육용 팝업을 보여줘야 하는 경우
@@ -278,7 +277,7 @@ class SendActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateVideo() {
+    fun navigateVideo() {
         val vod_intent = Intent()
         //ACTION_GET_CONTENT을 하게되면, 갤러리뿐 아니라 다른 저장공간에도 접근한다.
 //                      vod_intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -301,31 +300,13 @@ class SendActivity : AppCompatActivity() {
     private fun showPermissionContextPopup() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
-            .setMessage("프로필 이미지를 바꾸기 위해서는 갤러리 접근 권한이 필요합니다.")
+            .setMessage("정보를 등록하기 위해서는 갤러리 접근 권한이 필요합니다.")
             .setPositiveButton("동의하기") { _, _ ->
                 requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), OPEN_GALLERY)
             }
-            .setNegativeButton("취소하기") { _, _ -> }
+            .setNegativeButton("취소하기") { _, _ ->
+            }
             .create()
             .show()
-    }
-
-    fun createThumbnail(activity: Context?, path: String?): Bitmap? {
-        var mediaMetadataRetriever: MediaMetadataRetriever? = null
-        var bitmap: Bitmap? = null
-        try {
-            mediaMetadataRetriever = MediaMetadataRetriever()
-            mediaMetadataRetriever.setDataSource(activity, Uri.parse(path))
-            //timeUs는 마이크로 초 이므로 1000000초 곱해줘야 초단위다.
-            bitmap = mediaMetadataRetriever.getFrameAtTime(
-                1000000,
-                MediaMetadataRetriever.OPTION_CLOSEST_SYNC
-            )
-        } catch (e: java.lang.Exception) {
-            e.printStackTrace()
-        } finally {
-            mediaMetadataRetriever?.release()
-        }
-        return bitmap
     }
 }
