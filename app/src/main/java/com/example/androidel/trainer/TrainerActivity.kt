@@ -32,7 +32,7 @@ class TrainerActivity : AppCompatActivity() {
                 Log.e("TrainerActivity1", response.body()?.trainer.toString())
                 Log.e("TrainerActivity1", response.toString())
                 if (response.isSuccessful) {
-                    trainerAdapter = TrainerAdapter(response.body()?.trainer)
+                    trainerAdapter = TrainerAdapter(applicationContext, response.body()?.trainer)
                     binding.recyclerView.adapter = trainerAdapter
                     binding.recyclerView.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
                 }
