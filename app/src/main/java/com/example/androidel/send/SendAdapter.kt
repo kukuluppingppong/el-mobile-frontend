@@ -1,4 +1,4 @@
-package com.example.androidel
+package com.example.androidel.send
 
 import android.app.AlertDialog
 import android.content.Context
@@ -16,6 +16,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import com.example.androidel.R
 
 class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.ViewHolder>() {
     private var imageUriList: List<Uri> = listOf()

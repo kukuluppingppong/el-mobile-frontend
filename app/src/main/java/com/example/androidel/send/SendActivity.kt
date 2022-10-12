@@ -1,28 +1,31 @@
-package com.example.androidel
+package com.example.androidel.send
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.media.MediaMetadataRetriever
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidel.R
 import com.example.androidel.databinding.ActivitySendBinding
 import java.time.LocalDate
 
-
 class SendActivity : AppCompatActivity() {
+    private lateinit var currentImageUri: Uri
     private val binding by lazy { ActivitySendBinding.inflate(layoutInflater) }
     private lateinit var sendAdapter: SendAdapter
     private lateinit var list: ArrayList<Uri>
@@ -80,6 +83,14 @@ class SendActivity : AppCompatActivity() {
         binding.btnFood3.setOnClickListener {
             btnSelect = 3
             initImageViewProfile { navigateGallery() }
+        }
+
+        binding.btnNext.setOnClickListener {
+            SendOkhttp.send(currentImageUri, applicationContext,
+                1, binding.day.text.toString(),
+                binding.time1.text.substring(0, 2) + binding.time1.text.substring(3, 5),
+                binding.intake1.text.toString(),
+                binding.ratingBar1.rating.toInt())
         }
 
         var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)
@@ -141,7 +152,6 @@ class SendActivity : AppCompatActivity() {
             }
         }
 
-
         binding.edtOpinion.addTextChangedListener(object: TextWatcher {
             var maxText = ""
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -167,7 +177,7 @@ class SendActivity : AppCompatActivity() {
         {
             if(resultCode == RESULT_OK)
             {
-                var currentImageUri = data?.data
+                currentImageUri = data?.data!!
                 try{
                     currentImageUri?.let {
                         val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
@@ -187,8 +197,7 @@ class SendActivity : AppCompatActivity() {
                             }
                         }
                     }
-                }catch(e: Exception)
-                {
+                }catch(e: Exception) {
                     e.printStackTrace()
                 }
             }

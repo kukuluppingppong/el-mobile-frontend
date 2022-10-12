@@ -1,5 +1,6 @@
 package com.example.androidel.trainer
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.MyApplication
 import com.example.androidel.databinding.ActivityTrainerBinding
+import com.example.androidel.login.LoginActivity
 import com.example.androidel.trainer.model.TrainerJoinResponse
 import com.example.androidel.trainer.model.TrainerListModel
 import org.json.JSONObject
@@ -60,9 +62,9 @@ class TrainerActivity : AppCompatActivity() {
                     }
                     if (response.isSuccessful) {
                         Toast.makeText(this@TrainerActivity, "매칭 성공", Toast.LENGTH_SHORT).show()
-//                    var intent = Intent(applicationContext, WelcomeActivity::class.java)
-//                    startActivity(intent)
-//                    overridePendingTransition(0, 0)
+                        var intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(0, 0)
                     }
                 }
 
