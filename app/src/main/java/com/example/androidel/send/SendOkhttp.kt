@@ -8,6 +8,7 @@ import com.example.androidel.MyApplication
 import okhttp3.*
 import java.io.File
 import java.io.IOException
+import kotlin.text.Typography.degree
 
 object SendOkhttp {
     fun send(currentImageUri: Uri, context: Context,
@@ -30,6 +31,50 @@ object SendOkhttp {
         Log.e("태그", body.toString())
 
         val url = "http://ec2-13-125-255-47.ap-northeast-2.compute.amazonaws.com:8080/api/history/diet/${trainer_id}"
+
+        val request = Request.Builder()
+            .url(url)
+            .addHeader("Authorization", "Bearer ${MyApplication.prefs.token}")
+            .post(body)
+            .build()
+
+        val client = OkHttpClient()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("태그1", e.toString())
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.e("태그1", response.toString())
+            }
+        })
+    }
+
+    fun sendVideo(currentVideoUri: Uri, context: Context, trainer_id: Int,
+    index: Int, parts: String, sets: String, reps: String, degree: String) {
+        var body: RequestBody
+        val file = File(absolutelyPath2(currentVideoUri, context))
+        Log.e("갤러리 동영상 경로", absolutelyPath2(currentVideoUri, context).toString())
+
+        Log.e("태그", "$index, $parts, $sets, $reps, $degree")
+
+        body = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("file",
+                file.name,
+                RequestBody.create(MultipartBody.FORM, file))
+            .addFormDataPart("index", index.toString())
+            .addFormDataPart("parts", parts)
+            .addFormDataPart("sets", sets)
+            .addFormDataPart("reps", reps)
+            .addFormDataPart("degree", degree)
+            .build()
+
+        Log.e("TrainerId", trainer_id.toString())
+        Log.e("태그", body.toString())
+
+        val url = "http://ec2-13-125-255-47.ap-northeast-2.compute.amazonaws.com:8080/api/history/workout/${trainer_id}"
 
         val request = Request.Builder()
             .url(url)
@@ -73,6 +118,43 @@ object SendOkhttp {
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                         projection,
                         MediaStore.Images.Media._ID + " = ? ",
+                        arrayOf(document_id),
+                        null)
+                    if (cursor != null) {
+                        cursor.moveToFirst()
+                        fullPath = cursor.getString(cursor.getColumnIndexOrThrow(column))
+                    }
+                } finally {
+                    cursor.close()
+                }
+            }
+        }
+        return fullPath
+    }
+
+    fun absolutelyPath2(fileUri: Uri, ctx: Context): String? {
+        var fullPath: String? = null
+        val column = "_data"
+        var cursor = ctx.contentResolver.query(fileUri, null, null, null, null)
+        if (cursor != null) {
+            cursor.moveToFirst()
+            var document_id = cursor.getString(0)
+            if (document_id == null) {
+                for (i in 0 until cursor.columnCount) {
+                    if (column.equals(cursor.getColumnName(i), ignoreCase = true)) {
+                        fullPath = cursor.getString(i)
+                        break
+                    }
+                }
+            } else {
+                document_id = document_id.substring(document_id.lastIndexOf(":") + 1)
+                cursor.close()
+                val projection = arrayOf(column)
+                try {
+                    cursor = ctx.contentResolver.query(
+                        MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                        projection,
+                        MediaStore.Video.Media._ID + " = ? ",
                         arrayOf(document_id),
                         null)
                     if (cursor != null) {

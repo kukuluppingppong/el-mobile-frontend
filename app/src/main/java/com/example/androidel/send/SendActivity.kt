@@ -12,7 +12,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.RatingBar
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -25,11 +28,9 @@ import java.time.LocalDate
 class SendActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySendBinding.inflate(layoutInflater) }
     private lateinit var sendAdapter: SendAdapter
-    private lateinit var list: ArrayList<Uri>
 
-    private var uriArray = Array<Uri?>(3) { null }
-
-
+    private var videoArray = Array<Uri?>(3) { null }
+    private var imageArray = Array<Uri?>(3) { null }
 
     val OPEN_GALLERY = 1002
     private val VIDEO_FILE_REQUEST = 1003
@@ -93,20 +94,23 @@ class SendActivity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener {
             for (i in 0..2) {
-                if (uriArray[i] != null) {
-                    SendOkhttp.send(uriArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(),
+                if (videoArray[i] != null) {
+                    SendOkhttp.sendVideo(videoArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(), i+1,
+                        sendAdapter.parts[i].joinToString(", ", "[", "]"),
+                        sendAdapter.sets[i].toString(), sendAdapter.reps[i].toString(), sendAdapter.degree[i].toString()
+                    )
+                }
+            }
+
+            for (i in 0..2) {
+                if (imageArray[i] != null) {
+                    SendOkhttp.send(imageArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(),
                         dayList[i].text.toString(),
                         timeList[i].text.substring(0, 2) + timeList[i].text.substring(3, 5),
                         intakeList[i].text.toString(),
                         ratingList[i].rating.toInt())
                 }
             }
-
-//            SendOkhttp.send(currentImageUri, applicationContext,
-//                1, binding.day.text.toString(),
-//                binding.time1.text.substring(0, 2) + binding.time1.text.substring(3, 5),
-//                binding.intake1.text.toString(),
-//                binding.ratingBar1.rating.toInt())
         }
 
         var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)
@@ -167,23 +171,6 @@ class SendActivity : AppCompatActivity() {
                 }
             }
         }
-
-        binding.edtOpinion.addTextChangedListener(object: TextWatcher {
-            var maxText = ""
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                maxText = s.toString()
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if(binding.edtOpinion.lineCount > 2) {
-                    Toast.makeText(applicationContext, "최대 2줄입니다.", Toast.LENGTH_SHORT).show()
-                    binding.edtOpinion.setText(maxText)
-                    binding.edtOpinion.setSelection(binding.edtOpinion.length())
-                }
-            }
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -199,29 +186,31 @@ class SendActivity : AppCompatActivity() {
                         val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
                         val bitmap = ImageDecoder.decodeBitmap(source)
 
-
                         when (btnSelect) {
                             1 -> {
                                 binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text1.visibility = View.GONE
-                                uriArray[0] = currentImageUri
+                                imageArray[0] = currentImageUri
                             }
                             2 -> {
                                 binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text2.visibility = View.GONE
-                                uriArray[1] = currentImageUri
+                                imageArray[1] = currentImageUri
                             }
                             3 -> {
                                 binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text3.visibility = View.GONE
-                                uriArray[2] = currentImageUri
+                                imageArray[2] = currentImageUri
                             }
                         }
                     }
                 }catch(e: Exception) {
                     e.printStackTrace()
                 }
-                Log.e("이미지 URI 배열 확인", uriArray.contentToString())
+                if(videoArray.size == 3 && imageArray.isNotEmpty()) {
+                    binding.btnNext.visibility = View.VISIBLE
+                }
+                Log.e("이미지 URI 배열 확인", imageArray.contentToString())
             }
             else if(resultCode == RESULT_CANCELED)
             {
@@ -232,32 +221,29 @@ class SendActivity : AppCompatActivity() {
         if(requestCode == VIDEO_FILE_REQUEST) {
             if(resultCode == RESULT_OK)
             {
-                list = arrayListOf()
                 val videoUri = data?.clipData
                 if (videoUri == null) {
                     sendAdapter.setVideoOne(data?.data)
+                    videoArray[sendAdapter.select] = data?.data
                 }
 
                 var count = data?.clipData?.itemCount
                 if(count == null) {
                     count = 1
                 }
-//                if (count < exerciseKind.size) {
-//                    Toast.makeText(applicationContext, "순서대로 총 영상 ${exerciseKind.size}개 선택해 주세요", Toast.LENGTH_LONG).show()
-//                }
-//                if (count >= exerciseKind.size) {
-                try{
+                try {
                     videoUri?.let {
                         for (i in 0 until count) {
                             val imageUri = videoUri.getItemAt(i).uri
-                            list.add(imageUri)
+                            videoArray[i] = imageUri
                         }
-                        sendAdapter.setVideoList(list)
+                        sendAdapter.setVideoList(videoArray)
                     }
-                }catch(e: Exception)
+                } catch(e: Exception)
                 {
                     e.printStackTrace()
                 }
+                Log.e("비디오 URI 배열 확인", videoArray.contentToString())
             }
 
             else if(resultCode == RESULT_CANCELED)

@@ -19,11 +19,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.androidel.R
 
 class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.ViewHolder>() {
-    private var imageUriList: List<Uri> = listOf()
+    private var imageUriList: Array<Uri?> = arrayOf()
     private var imageUriOne: Uri? = null
     private lateinit var context: Context
     var count = 3
     var select = 0
+
+    var parts = Array(count) { ArrayList<String?>(3) }
+    var sets = Array<String?>(count) { null }
+    var reps = Array<String?>(count) { null }
+    var degree = Array<String?>(count) { null }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.send_item_view, parent, false)
@@ -36,8 +41,8 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
 
         holder.record.setOnClickListener {
             lateinit var btnPart : ArrayList<Button>
-            var choiceButton = ArrayList<String>()
-            var choiceMaxSize = 4
+            var choiceButton = ArrayList<String?>()
+            var choiceMaxSize = 3
 
             lateinit var btnStrong : ArrayList<Button>
             var choiceStrength = ArrayList<String>()
@@ -115,6 +120,11 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
                 holder.itemNumber.text = number.text
                 holder.itemStrength.text = choiceStrength.joinToString()
 
+                parts[position] = choiceButton
+                sets[position] = set.text.toString()
+                reps[position] = number.text.toString()
+                degree[position] = choiceStrength.joinToString()
+
                 dlg.dismiss()
             }
         }
@@ -132,8 +142,8 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
             holder.video.setImageBitmap(Bitmap.createScaledBitmap(
                 createThumbnail(context, imageUriList[position].toString())!!, holder.video.width, holder.video.height, false))
             holder.text.visibility = View.GONE
-            if (position == count-1) {
-                this.imageUriList = listOf()
+            if (position == count - 1) {
+                this.imageUriList = arrayOf()
             }
         }
 
@@ -159,7 +169,7 @@ class SendAdapter(val onClick: () -> Unit): RecyclerView.Adapter<SendAdapter.Vie
         val itemStrength = itemView.findViewById<TextView>(R.id.itemStrength)
     }
 
-    fun setVideoList(videoUriList: List<Uri>) {
+    fun setVideoList(videoUriList: Array<Uri?>) {
         this.imageUriList = videoUriList
         notifyDataSetChanged()
     }

@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textSize="14sp"
-                android:text="전신, 팔, 복근, 하체"/>
+                android:text=""/>
 
         </FrameLayout>
 
@@ -94,8 +94,7 @@
                 android:id="@+id/itemSet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="3"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,8 +114,7 @@
                 android:id="@+id/itemNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="15"/>
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,8 +134,7 @@
                 android:id="@+id/itemStrength"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:hint="매우 힘듦"/>
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
