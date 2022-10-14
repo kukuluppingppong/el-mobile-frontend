@@ -1,5 +1,6 @@
 package com.example.androidel.trainer.interfaces
 
+import com.example.androidel.login.models.TrainerResponse
 import com.example.androidel.trainer.model.TrainerJoinResponse
 import com.example.androidel.trainer.model.TrainerListModel
 import retrofit2.Call
@@ -15,4 +16,7 @@ interface TrainerService {
     fun getTrainerJoin(
         @Path("trainerId") trainerId: Int
     ): Call<TrainerJoinResponse>
+
+    @GET("api/training")
+    fun trainerGet(): Call<TrainerResponse>
 }

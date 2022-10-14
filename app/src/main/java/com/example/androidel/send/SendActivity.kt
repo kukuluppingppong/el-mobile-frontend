@@ -12,23 +12,24 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RatingBar
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidel.MyApplication
 import com.example.androidel.R
 import com.example.androidel.databinding.ActivitySendBinding
 import java.time.LocalDate
 
 class SendActivity : AppCompatActivity() {
-    private lateinit var currentImageUri: Uri
     private val binding by lazy { ActivitySendBinding.inflate(layoutInflater) }
     private lateinit var sendAdapter: SendAdapter
     private lateinit var list: ArrayList<Uri>
+
+    private var uriArray = Array<Uri?>(3) { null }
+
+
 
     val OPEN_GALLERY = 1002
     private val VIDEO_FILE_REQUEST = 1003
@@ -38,6 +39,11 @@ class SendActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val dayList = arrayListOf(binding.day1, binding.day2, binding.day3)
+        val timeList = arrayListOf(binding.time1, binding.time2, binding.time3)
+        val intakeList = arrayListOf(binding.intake1, binding.intake2, binding.intake3)
+        val ratingList = arrayListOf(binding.ratingBar1, binding.ratingBar2, binding.ratingBar3)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             var date = LocalDate.now()
@@ -86,11 +92,21 @@ class SendActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
-            SendOkhttp.send(currentImageUri, applicationContext,
-                1, binding.day.text.toString(),
-                binding.time1.text.substring(0, 2) + binding.time1.text.substring(3, 5),
-                binding.intake1.text.toString(),
-                binding.ratingBar1.rating.toInt())
+            for (i in 0..2) {
+                if (uriArray[i] != null) {
+                    SendOkhttp.send(uriArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(),
+                        dayList[i].text.toString(),
+                        timeList[i].text.substring(0, 2) + timeList[i].text.substring(3, 5),
+                        intakeList[i].text.toString(),
+                        ratingList[i].rating.toInt())
+                }
+            }
+
+//            SendOkhttp.send(currentImageUri, applicationContext,
+//                1, binding.day.text.toString(),
+//                binding.time1.text.substring(0, 2) + binding.time1.text.substring(3, 5),
+//                binding.intake1.text.toString(),
+//                binding.ratingBar1.rating.toInt())
         }
 
         var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)
@@ -177,29 +193,35 @@ class SendActivity : AppCompatActivity() {
         {
             if(resultCode == RESULT_OK)
             {
-                currentImageUri = data?.data!!
+                var currentImageUri = data?.data!!
                 try{
                     currentImageUri?.let {
                         val source = ImageDecoder.createSource(this.contentResolver, currentImageUri)
                         val bitmap = ImageDecoder.decodeBitmap(source)
+
+
                         when (btnSelect) {
                             1 -> {
                                 binding.btnFood1?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text1.visibility = View.GONE
+                                uriArray[0] = currentImageUri
                             }
                             2 -> {
                                 binding.btnFood2?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text2.visibility = View.GONE
+                                uriArray[1] = currentImageUri
                             }
                             3 -> {
                                 binding.btnFood3?.setImageBitmap(Bitmap.createScaledBitmap(bitmap, binding.btnFood1.width-2, binding.btnFood1.height-2, false))
                                 binding.text3.visibility = View.GONE
+                                uriArray[2] = currentImageUri
                             }
                         }
                     }
                 }catch(e: Exception) {
                     e.printStackTrace()
                 }
+                Log.e("이미지 URI 배열 확인", uriArray.contentToString())
             }
             else if(resultCode == RESULT_CANCELED)
             {
