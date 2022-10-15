@@ -8,8 +8,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -93,6 +91,9 @@ class SendActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
+            val task = MyAsyncTask(SendActivity@this)
+            task.execute()
+
             for (i in 0..2) {
                 if (videoArray[i] != null) {
                     SendOkhttp.sendVideo(videoArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(), i+1,
