@@ -1,4 +1,4 @@
-package com.example.androidel
+package com.example.androidel.record
 
 import android.app.Dialog
 import android.view.Window

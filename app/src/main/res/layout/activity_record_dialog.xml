@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".RecordDialogActivity">
+    tools:context=".record.RecordDialogActivity">
 
     <VideoView
         android:layout_width="300dp"

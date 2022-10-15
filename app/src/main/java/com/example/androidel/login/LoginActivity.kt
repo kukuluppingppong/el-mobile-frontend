@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidel.MyApplication
 import com.example.androidel.Prefs
-import com.example.androidel.RecordActivity
+import com.example.androidel.record.RecordActivity
 import com.example.androidel.databinding.ActivityLoginBinding
 import com.example.androidel.login.models.LoginResponse
 import com.example.androidel.login.models.LoginResult
@@ -61,17 +61,22 @@ class LoginActivity : AppCompatActivity() {
                         Log.e("태그", response.toString())
                         Log.e("태그", MyApplication.prefs.token!!)
 
-                        if (MyApplication.prefs.trainerId != null) {
-                            val intent = Intent(applicationContext, SendActivity::class.java)
+                        val intent = Intent(applicationContext, RecordActivity::class.java)
                             startActivity(intent)
                             finish()
                             overridePendingTransition(0, 0)
-                        } else {
-                            val intent = Intent(applicationContext, TrainerActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                            overridePendingTransition(0, 0)
-                        }
+
+//                        if (MyApplication.prefs.trainerId != null) {
+//                            val intent = Intent(applicationContext, SendActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                            overridePendingTransition(0, 0)
+//                        } else {
+//                            val intent = Intent(applicationContext, TrainerActivity::class.java)
+//                            startActivity(intent)
+//                            finish()
+//                            overridePendingTransition(0, 0)
+//                        }
                     } else {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }

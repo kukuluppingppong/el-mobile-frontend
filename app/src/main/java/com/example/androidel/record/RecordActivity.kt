@@ -1,11 +1,11 @@
-package com.example.androidel
+package com.example.androidel.record
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.androidel.databinding.ActivityRecordBinding
 import java.time.LocalDate
@@ -57,8 +57,6 @@ class RecordActivity : AppCompatActivity() {
             val dlg = RecordDialogActivity(this)
             dlg.show()
         }
-
-
     }
 
     // 형식 변환
@@ -75,7 +73,7 @@ class RecordActivity : AppCompatActivity() {
 
         var dayList = daysInMonthArray(selectedDate)
 
-        CalendarAdapter = CalendarAdapter(dayList)
+        CalendarAdapter = CalendarAdapter(YearMonth.from(selectedDate), dayList)
         binding.recyclerView.adapter = CalendarAdapter
         binding.recyclerView.layoutManager = GridLayoutManager(this, 7)
     }
