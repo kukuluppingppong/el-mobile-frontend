@@ -3,6 +3,7 @@ package com.example.androidel
 import android.app.Application
 import com.example.androidel.login.AuthInterceptor
 import com.example.androidel.login.interfaces.LoginService
+import com.example.androidel.record.interfaces.RecordService
 import com.example.androidel.signUp.interfaces.SignUpService
 import com.example.androidel.trainer.interfaces.TrainerService
 import okhttp3.OkHttpClient
@@ -25,6 +26,7 @@ class MyApplication: Application() {
         var loginService: LoginService
         var signUpService: SignUpService
         var trainerService: TrainerService
+        var recordService: RecordService
 
         val retrofit: Retrofit
             get() = Retrofit.Builder()
@@ -37,6 +39,7 @@ class MyApplication: Application() {
             loginService = retrofit.create(LoginService::class.java)
             signUpService = retrofit.create(SignUpService::class.java)
             trainerService = retrofit.create(TrainerService::class.java)
+            recordService = retrofit.create(RecordService::class.java)
         }
     }
 }

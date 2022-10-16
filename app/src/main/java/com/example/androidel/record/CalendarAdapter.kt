@@ -13,27 +13,28 @@ import com.example.androidel.R
 import java.time.LocalDate
 import java.time.YearMonth
 
-class CalendarAdapter(val yearMonth: YearMonth, val dayList: ArrayList<String>): RecyclerView.Adapter<CalendarAdapter.ViewHolder>(){
+@RequiresApi(Build.VERSION_CODES.O)
+class CalendarAdapter(val yearMonth: YearMonth, val dayList: ArrayList<String>, val onClick: () -> Unit)
+    : RecyclerView.Adapter<CalendarAdapter.ViewHolder>(){
     private val totalMax = 1
     private var total = 0
-    private lateinit var selectedText: TextView
+    private lateinit var selectedTextView : TextView
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private val date = LocalDate.now()
+    var selectedText = "${date.year}${date.monthValue}${date.dayOfMonth}"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.calendar_cell, parent, false)
         return ViewHolder(view)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // 년 월 텍스트 변경
         holder.dayText.text = dayList[position]
 
         if("$yearMonth" == "${date.year}-${date.monthValue}" && holder.dayText.text == "${date.dayOfMonth}") {
             total += 1
-            selectedText = holder.dayText
+            selectedTextView = holder.dayText
             holder.dayText.setBackgroundResource(R.drawable.record_round_button)
             holder.dayText.setTextColor(Color.WHITE)
         }
@@ -42,16 +43,18 @@ class CalendarAdapter(val yearMonth: YearMonth, val dayList: ArrayList<String>):
         holder.itemView.setOnClickListener {
             if (holder.dayText.text != "") {
                 if (total < totalMax) {
-                    selectedText = holder.dayText
+                    selectedTextView = holder.dayText
                 } else {
-                    selectedText.background = null
-                    selectedText.setTextColor(Color.parseColor("#040415"))
-                    selectedText = holder.dayText
+                    selectedTextView.background = null
+                    selectedTextView.setTextColor(Color.parseColor("#040415"))
+                    selectedTextView = holder.dayText
                     total -= 1
                 }
                 holder.dayText.setBackgroundResource(R.drawable.record_round_button)
                 holder.dayText.setTextColor(Color.WHITE)
                 total += 1
+                selectedText = "${date.year}${date.monthValue}${selectedTextView.text}"
+                onClick.invoke()
             }
         }
     }
