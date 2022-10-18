@@ -146,7 +146,6 @@
                 android:textStyle="bold"
                 android:textColor="@drawable/btn_send"
                 android:text="식단" />
-
         </LinearLayout>
 
         <FrameLayout
@@ -273,7 +272,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="X"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -334,7 +332,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="X"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -395,9 +392,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="X"/>
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -437,9 +432,10 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/foodTotal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="5"/>
+                                android:text="0"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -449,33 +445,37 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-
                                 android:text="만족도"/>
 
                             <TextView
+                                android:id="@+id/scoreTotal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3"/>
+                                android:text="0"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="/5"/>
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/foodLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
+                        android:id="@+id/food1"
                         android:layout_width="0dp"
-                        android:layout_height="150dp"
+                        android:layout_height="140dp"
                         android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/sample"/>
 
                     <LinearLayout
@@ -506,10 +506,9 @@
                                 android:text="식사 시간  "/>
 
                             <TextView
+                                android:id="@+id/time1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12:30"/>
-
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -526,10 +525,9 @@
                                 android:text="식사량  "/>
 
                             <TextView
+                                android:id="@+id/amount1"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="가볍게"/>
-
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -546,6 +544,7 @@
                                 android:text="만족도"/>
 
                             <RatingBar
+                                android:id="@+id/score1"
                                 style="@style/Widget.AppCompat.RatingBar.Small"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -556,21 +555,25 @@
                                 android:progressTint="#98bffd"
                                 android:rating="0"
                                 android:stepSize="1" />
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/foodLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
+                        android:id="@+id/food2"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
                         android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/sample"/>
 
                     <LinearLayout
@@ -601,10 +604,9 @@
                                 android:text="식사 시간  "/>
 
                             <TextView
+                                android:id="@+id/time2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12:30"/>
-
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -621,9 +623,9 @@
                                 android:text="식사량  "/>
 
                             <TextView
+                                android:id="@+id/amount2"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="가볍게"/>
+                                android:layout_height="wrap_content" />
 
                         </LinearLayout>
 
@@ -641,6 +643,7 @@
                                 android:text="만족도"/>
 
                             <RatingBar
+                                android:id="@+id/score2"
                                 style="@style/Widget.AppCompat.RatingBar.Small"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -651,21 +654,25 @@
                                 android:progressTint="#98bffd"
                                 android:rating="0"
                                 android:stepSize="1" />
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/foodLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <ImageView
+                        android:id="@+id/food3"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
                         android:layout_weight="1"
+                        android:layout_marginRight="10dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/sample"/>
 
                     <LinearLayout
@@ -680,7 +687,7 @@
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
                             android:textSize="20sp"
-                            android:text="점심"/>
+                            android:text="저녁"/>
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -696,10 +703,9 @@
                                 android:text="식사 시간  "/>
 
                             <TextView
+                                android:id="@+id/time3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="12:30"/>
-
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -716,10 +722,9 @@
                                 android:text="식사량  "/>
 
                             <TextView
+                                android:id="@+id/amount3"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="가볍게"/>
-
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -736,6 +741,7 @@
                                 android:text="만족도"/>
 
                             <RatingBar
+                                android:id="@+id/score3"
                                 style="@style/Widget.AppCompat.RatingBar.Small"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -746,14 +752,10 @@
                                 android:progressTint="#98bffd"
                                 android:rating="0"
                                 android:stepSize="1" />
-
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-
-
             </LinearLayout>
         </FrameLayout>
-
     </LinearLayout>
 </ScrollView>
