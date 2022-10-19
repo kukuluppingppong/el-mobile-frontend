@@ -1,14 +1,12 @@
 package com.example.androidel.record
 
-import android.media.Image
-import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.androidel.MyApplication
@@ -21,6 +19,7 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+
 
 class RecordActivity : AppCompatActivity() {
     val binding by lazy { ActivityRecordBinding.inflate(layoutInflater) }
@@ -39,12 +38,18 @@ class RecordActivity : AppCompatActivity() {
     private lateinit var amountList: ArrayList<TextView>
     private lateinit var scoreList: ArrayList<RatingBar>
 
-    private var pathArray = Array<String?>(3) { null }
+    private lateinit var videoList: ArrayList<VideoView>
+
+    private lateinit var mediaController : MediaController
+
+    var isFull = false
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        binding.scroll.smoothScrollTo(0, 0)
 
         setList = arrayListOf(binding.sets1, binding.sets2, binding.sets3)
         repList = arrayListOf(binding.reps1, binding.reps2, binding.reps3)
@@ -56,6 +61,8 @@ class RecordActivity : AppCompatActivity() {
         timeList = arrayListOf(binding.time1, binding.time2, binding.time3)
         amountList = arrayListOf(binding.amount1, binding.amount2, binding.amount3)
         scoreList = arrayListOf(binding.score1, binding.score2, binding.score3)
+
+        videoList = arrayListOf(binding.video1, binding.video2, binding.video3)
 
         binding.btnExercise.isSelected = true
 
@@ -94,9 +101,39 @@ class RecordActivity : AppCompatActivity() {
             callDietData()
         }
 
-        binding.exercise1.setOnClickListener {
-            val dlg = RecordDialogActivity(this)
-            dlg.show()
+        mediaController = MediaController(RecordActivity@this)
+
+        binding.video1.setOnPreparedListener {
+            binding.video1.seekTo(1)
+            binding.video1.pause()
+        }
+
+        binding.video2.setOnPreparedListener {
+            binding.video2.seekTo(1)
+            binding.video2.pause()
+        }
+
+        binding.video3.setOnPreparedListener {
+            binding.video3.seekTo(1)
+            binding.video3.pause()
+        }
+
+        binding.btnWork1.setOnClickListener {
+            videoList[0].setMediaController(mediaController)
+            binding.video2.pause()
+            binding.video3.pause()
+        }
+
+        binding.btnWork2.setOnClickListener {
+            videoList[1].setMediaController(mediaController)
+            binding.video1.pause()
+            binding.video3.pause()
+        }
+
+        binding.btnWork3.setOnClickListener {
+            videoList[2].setMediaController(mediaController)
+            binding.video1.pause()
+            binding.video2.pause()
         }
     }
 
@@ -147,6 +184,7 @@ class RecordActivity : AppCompatActivity() {
                         repList[i].text = result[i].reps.toString()
                         degreeList[i].text = result[i].degree + ", "
                         partList[i].text = result[i].parts.joinToString()
+                        videoList[i].setVideoPath("https://el-trainer.s3.ap-northeast-2.amazonaws.com/${result[i].video}")
                     }
                 } else {
                     Toast.makeText(applicationContext, "저장된 운동 데이터가 없습니다.", Toast.LENGTH_SHORT).show()
@@ -221,10 +259,6 @@ class RecordActivity : AppCompatActivity() {
                 Log.e("요일별 운동 오류", t.toString())
             }
         })
-
-        for (i in pathArray.indices) {
-            Log.e("태그", pathArray[i].toString())
-        }
     }
 
     private fun foodGlide(path: String, position: ImageView) {
