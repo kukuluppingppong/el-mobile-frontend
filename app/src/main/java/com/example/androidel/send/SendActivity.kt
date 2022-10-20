@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.MyApplication
 import com.example.androidel.R
 import com.example.androidel.databinding.ActivitySendBinding
+import com.example.androidel.record.RecordActivity
 import java.time.LocalDate
 
 class SendActivity : AppCompatActivity() {
@@ -112,6 +113,11 @@ class SendActivity : AppCompatActivity() {
                         ratingList[i].rating.toInt())
                 }
             }
+
+            val intent = Intent(applicationContext, RecordActivity::class.java)
+            startActivity(intent)
+            finish()
+            overridePendingTransition(0, 0)
         }
 
         var record = arrayListOf(binding.btnRecord1, binding.btnRecord2, binding.btnRecord3)

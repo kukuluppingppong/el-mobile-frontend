@@ -42,8 +42,6 @@ class RecordActivity : AppCompatActivity() {
 
     private lateinit var mediaController : MediaController
 
-    var isFull = false
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,18 +118,21 @@ class RecordActivity : AppCompatActivity() {
 
         binding.btnWork1.setOnClickListener {
             videoList[0].setMediaController(mediaController)
+            binding.video1.start()
             binding.video2.pause()
             binding.video3.pause()
         }
 
         binding.btnWork2.setOnClickListener {
             videoList[1].setMediaController(mediaController)
+            binding.video2.start()
             binding.video1.pause()
             binding.video3.pause()
         }
 
         binding.btnWork3.setOnClickListener {
             videoList[2].setMediaController(mediaController)
+            binding.video3.start()
             binding.video1.pause()
             binding.video2.pause()
         }

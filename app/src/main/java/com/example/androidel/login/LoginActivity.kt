@@ -66,17 +66,17 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                             overridePendingTransition(0, 0)
 
-//                        if (MyApplication.prefs.trainerId != null) {
-//                            val intent = Intent(applicationContext, SendActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
-//                            overridePendingTransition(0, 0)
-//                        } else {
-//                            val intent = Intent(applicationContext, TrainerActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
-//                            overridePendingTransition(0, 0)
-//                        }
+                        if (MyApplication.prefs.trainerId != null) {
+                            val intent = Intent(applicationContext, SendActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                            overridePendingTransition(0, 0)
+                        } else {
+                            val intent = Intent(applicationContext, TrainerActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                            overridePendingTransition(0, 0)
+                        }
                     } else {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }

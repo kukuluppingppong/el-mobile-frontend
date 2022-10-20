@@ -2,8 +2,10 @@ package com.example.androidel
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidel.databinding.ActivityBasicBinding
+import com.example.androidel.login.LoginActivity
 import com.example.androidel.trainer.TrainerActivity
 
 class BasicActivity : AppCompatActivity() {
@@ -28,22 +30,22 @@ class BasicActivity : AppCompatActivity() {
 //                return@setOnClickListener
 //            }
 //
-//            if (!rdoCheck) {
-//                Toast.makeText(applicationContext, "성별을 체크해주세요.", Toast.LENGTH_SHORT).show()
-//                return@setOnClickListener
-//            }
+            if (!rdoCheck) {
+                Toast.makeText(applicationContext, "성별을 체크해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            val intent = Intent(applicationContext, TrainerActivity::class.java)
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
 
-//        binding.rGroup.setOnCheckedChangeListener { group, checkedId ->
-//            when (binding.rGroup.checkedRadioButtonId) {
-//                R.id.btnMan -> binding.character.setImageResource(R.drawable.man_character)
-//                R.id.btnWoman -> binding.character.setImageResource(R.drawable.woman_character)
-//            }
-//            rdoCheck = true
-//        }
+        binding.rGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (binding.rGroup.checkedRadioButtonId) {
+                R.id.btnMan -> binding.character.setImageResource(R.drawable.man_character)
+                R.id.btnWoman -> binding.character.setImageResource(R.drawable.woman_character)
+            }
+            rdoCheck = true
+        }
     }
 }
