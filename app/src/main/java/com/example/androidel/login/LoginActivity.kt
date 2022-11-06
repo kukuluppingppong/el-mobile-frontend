@@ -61,11 +61,6 @@ class LoginActivity : AppCompatActivity() {
                         Log.e("태그", response.toString())
                         Log.e("태그", MyApplication.prefs.token!!)
 
-                        val intent = Intent(applicationContext, RecordActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                            overridePendingTransition(0, 0)
-
                         if (MyApplication.prefs.trainerId != null) {
                             val intent = Intent(applicationContext, SendActivity::class.java)
                             startActivity(intent)

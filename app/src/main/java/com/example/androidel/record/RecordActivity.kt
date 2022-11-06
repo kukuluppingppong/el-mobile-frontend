@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.example.androidel.MyApplication
 import com.example.androidel.databinding.ActivityRecordBinding
+import com.example.androidel.record.models.FeedBackResult
 import com.example.androidel.record.models.RecordDietResult
 import com.example.androidel.record.models.RecordWorkoutResult
 import retrofit2.Call
@@ -195,6 +196,29 @@ class RecordActivity : AppCompatActivity() {
             override fun onFailure(call: Call<RecordWorkoutResult>, t: Throwable) {
                 Log.e("요일별 운동 오류", t.toString())
             }
+        })
+
+        val call2: Call<FeedBackResult> = MyApplication.recordService.getFeedBackList()
+
+        call2.enqueue(object: Callback<FeedBackResult> {
+            override fun onResponse(
+                call: Call<FeedBackResult>,
+                response: Response<FeedBackResult>,
+            ) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    with(binding) {
+                        feedback1.text = result!!.data[0]
+                        feedback2.text = result!!.data[1]
+                        feedback3.text = result!!.data[2]
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<FeedBackResult>, t: Throwable) {
+                Log.e("피드백 메시지 오류", t.toString())
+            }
+
         })
     }
 

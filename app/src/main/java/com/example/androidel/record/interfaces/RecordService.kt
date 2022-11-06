@@ -1,5 +1,6 @@
 package com.example.androidel.record.interfaces
 
+import com.example.androidel.record.models.FeedBackResult
 import com.example.androidel.record.models.RecordDietResult
 import com.example.androidel.record.models.RecordWorkoutResult
 import retrofit2.Call
@@ -18,4 +19,7 @@ interface RecordService {
         @Path("trainerId") trainerId: Int,
         @Path("date") date: String
     ): Call<RecordDietResult>
+
+    @GET("api/history/feedback")
+    fun getFeedBackList(): Call<FeedBackResult>
 }
