@@ -31,6 +31,8 @@ class SendActivity : AppCompatActivity() {
     private var videoArray = Array<Uri?>(3) { null }
     private var imageArray = Array<Uri?>(3) { null }
 
+    private var videoC = 0
+    private var imageC = 0
     val OPEN_GALLERY = 1002
     private val VIDEO_FILE_REQUEST = 1003
     var btnSelect = 0
@@ -92,6 +94,8 @@ class SendActivity : AppCompatActivity() {
         }
 
         binding.btnNext.setOnClickListener {
+//            Log.e("ID", MyApplication.prefs.trainerId!!)
+
             val task = MyAsyncTask(SendActivity@this)
             task.execute()
 
@@ -106,9 +110,24 @@ class SendActivity : AppCompatActivity() {
 
             for (i in 0..2) {
                 if (imageArray[i] != null) {
+                    var time = when (timeList[i].text.length) {
+                        3 -> "0" + timeList[i].text.substring(0, 1) + "0" + timeList[i].text.substring(2, 3)
+                        4 -> {
+                            if(timeList[i].text.indexOf(":") == 1) {
+                                "0" + timeList[i].text.substring(0, 1) + timeList[i].text.substring(2, 4)
+                            } else {
+                                timeList[i].text.substring(0, 2) + "0" + timeList[i].text.substring(3, 4)
+                            }
+                        }
+                        5 -> timeList[i].text.substring(0, 2) + timeList[i].text.substring(3, 5)
+                        else -> "00:00"
+                    }
+
+                    Log.e("태그", time)
+
                     SendOkhttp.send(imageArray[i]!!, applicationContext, MyApplication.prefs.trainerId!!.toInt(),
                         dayList[i].text.toString(),
-                        timeList[i].text.substring(0, 2) + timeList[i].text.substring(3, 5),
+                        time,
                         intakeList[i].text.toString(),
                         ratingList[i].rating.toInt())
                 }
@@ -116,7 +135,6 @@ class SendActivity : AppCompatActivity() {
 
             val intent = Intent(applicationContext, RecordActivity::class.java)
             startActivity(intent)
-            finish()
             overridePendingTransition(0, 0)
         }
 
@@ -187,6 +205,7 @@ class SendActivity : AppCompatActivity() {
         {
             if(resultCode == RESULT_OK)
             {
+                imageC++
                 var currentImageUri = data?.data!!
                 try{
                     currentImageUri?.let {
@@ -214,7 +233,7 @@ class SendActivity : AppCompatActivity() {
                 }catch(e: Exception) {
                     e.printStackTrace()
                 }
-                if(videoArray.size == 3 && imageArray.isNotEmpty()) {
+                if(videoC > 0 && imageC > 0) {
                     binding.btnNext.visibility = View.VISIBLE
                 }
                 Log.e("이미지 URI 배열 확인", imageArray.contentToString())
@@ -228,6 +247,7 @@ class SendActivity : AppCompatActivity() {
         if(requestCode == VIDEO_FILE_REQUEST) {
             if(resultCode == RESULT_OK)
             {
+                videoC++
                 val videoUri = data?.clipData
                 if (videoUri == null) {
                     sendAdapter.setVideoOne(data?.data)
@@ -249,6 +269,9 @@ class SendActivity : AppCompatActivity() {
                 } catch(e: Exception)
                 {
                     e.printStackTrace()
+                }
+                if(videoC > 0 && imageC > 0) {
+                    binding.btnNext.visibility = View.VISIBLE
                 }
                 Log.e("비디오 URI 배열 확인", videoArray.contentToString())
             }

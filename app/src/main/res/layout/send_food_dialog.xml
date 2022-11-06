@@ -25,9 +25,9 @@
             android:layout_marginLeft="5dp"
             android:paddingBottom="8dp"
             android:textSize="18sp"
-            android:hint="12"
+            android:hint="07"
             android:textAlignment="center"
-            android:maxLength="4"
+            android:maxLength="2"
             android:maxLines="1"
             android:inputType="number" />
 
@@ -45,7 +45,7 @@
             android:layout_marginLeft="5dp"
             android:paddingBottom="8dp"
             android:textSize="18sp"
-            android:hint="15"
+            android:hint="05"
             android:textAlignment="center"
             android:maxLength="2"
             android:maxLines="1"

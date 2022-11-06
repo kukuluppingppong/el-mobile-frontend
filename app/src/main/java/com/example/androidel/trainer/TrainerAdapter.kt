@@ -2,17 +2,13 @@ package com.example.androidel.trainer
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.androidel.R
@@ -35,8 +31,8 @@ class TrainerAdapter(val context: Context, private val trainerList: MutableList<
                 .into(image)
 
             name.text = trainerList?.get(position)?.name ?: ""
-            gender.text = trainerList?.get(position)?.gender ?: ""
-            time.text = trainerList?.get(position)?.award ?: ""
+            career.text = trainerList?.get(position)?.career ?: "-"
+            award.text = trainerList?.get(position)?.award ?: "-"
 
             checkBox.setOnClickListener {
                 if (selectBox != null) {
@@ -65,8 +61,8 @@ class TrainerAdapter(val context: Context, private val trainerList: MutableList<
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val image = itemView.findViewById<ImageView>(R.id.image)
         val name = itemView.findViewById<TextView>(R.id.name)
-        val gender = itemView.findViewById<TextView>(R.id.gender)
-        val time = itemView.findViewById<TextView>(R.id.time)
+        val career = itemView.findViewById<TextView>(R.id.career)
+        val award = itemView.findViewById<TextView>(R.id.award)
         val checkBox = itemView.findViewById<CheckBox>(R.id.chkBox)
         val detail = itemView.findViewById<ImageView>(R.id.detail)
     }

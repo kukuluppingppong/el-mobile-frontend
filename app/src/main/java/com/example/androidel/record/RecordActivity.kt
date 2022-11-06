@@ -41,6 +41,8 @@ class RecordActivity : AppCompatActivity() {
 
     private lateinit var videoList: ArrayList<VideoView>
 
+    private lateinit var visyList: ArrayList<LinearLayout>
+
     private lateinit var mediaController : MediaController
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -62,6 +64,8 @@ class RecordActivity : AppCompatActivity() {
         scoreList = arrayListOf(binding.score1, binding.score2, binding.score3)
 
         videoList = arrayListOf(binding.video1, binding.video2, binding.video3)
+
+        visyList = arrayListOf(binding.layout1, binding.layout2, binding.layout3)
 
         binding.btnExercise.isSelected = true
 
@@ -177,11 +181,18 @@ class RecordActivity : AppCompatActivity() {
         call.enqueue(object: Callback<RecordWorkoutResult> {
             override fun onResponse(call: Call<RecordWorkoutResult>, response: Response<RecordWorkoutResult>) {
                 if (response.isSuccessful) {
+
+                    for(i in 0..2) {
+                        visyList[i].visibility = View.GONE
+                    }
+
                     val result = response.body()!!.data
                     Log.e("요일별 운동 데이터", response.body().toString())
                     binding.time.text = result[0].time
+                    binding.ct.text = result.size.toString()
 
-                    for(i in 0..2) {
+                    for(i in result.indices) {
+                        visyList[i].visibility = View.VISIBLE
                         setList[i].text = result[i].sets.toString()
                         repList[i].text = result[i].reps.toString()
                         degreeList[i].text = result[i].degree + ", "

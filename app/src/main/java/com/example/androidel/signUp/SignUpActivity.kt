@@ -2,12 +2,16 @@ package com.example.androidel.signUp
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidel.BasicActivity
 import com.example.androidel.MyApplication
+import com.example.androidel.R
 import com.example.androidel.databinding.ActivityJoinBinding
+import com.example.androidel.login.LoginActivity
 import com.example.androidel.signUp.model.SignUpBody
 import com.example.androidel.signUp.model.SignUpResponse
 import org.json.JSONObject
@@ -22,36 +26,36 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        var clickState = false
-//        var clickAgainState = false
-//
-//        binding.btnHide.setOnClickListener {
-//            if(clickState) {
-//                clickState = false
-//                binding.btnHide.setImageResource(R.drawable.ic_hide)
-//                binding.editPw.transformationMethod = PasswordTransformationMethod.getInstance()
-//                binding.editPw.setSelection(binding.editPw.text.length)
-//            } else {
-//                clickState = true
-//                binding.btnHide.setImageResource(R.drawable.ic_unhide)
-//                binding.editPw.transformationMethod = HideReturnsTransformationMethod.getInstance()
-//                binding.editPw.setSelection(binding.editPw.text.length)
-//            }
-//        }
-//
-//        binding.btnHideAgain.setOnClickListener {
-//            if(clickAgainState) {
-//                clickAgainState = false
-//                binding.btnHideAgain.setImageResource(R.drawable.ic_hide)
-//                binding.editPwCheck.transformationMethod = PasswordTransformationMethod.getInstance()
-//                binding.editPwCheck.setSelection(binding.editPwCheck.text.length)
-//            } else {
-//                clickAgainState = true
-//                binding.btnHideAgain.setImageResource(R.drawable.ic_unhide)
-//                binding.editPwCheck.transformationMethod = HideReturnsTransformationMethod.getInstance()
-//                binding.editPwCheck.setSelection(binding.editPwCheck.text.length)
-//            }
-//        }
+        var clickState = false
+        var clickAgainState = false
+
+        binding.btnHide.setOnClickListener {
+            if(clickState) {
+                clickState = false
+                binding.btnHide.setImageResource(R.drawable.ic_hide)
+                binding.editPw.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.editPw.setSelection(binding.editPw.text.length)
+            } else {
+                clickState = true
+                binding.btnHide.setImageResource(R.drawable.ic_unhide)
+                binding.editPw.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.editPw.setSelection(binding.editPw.text.length)
+            }
+        }
+
+        binding.btnHideAgain.setOnClickListener {
+            if(clickAgainState) {
+                clickAgainState = false
+                binding.btnHideAgain.setImageResource(R.drawable.ic_hide)
+                binding.editPwCheck.transformationMethod = PasswordTransformationMethod.getInstance()
+                binding.editPwCheck.setSelection(binding.editPwCheck.text.length)
+            } else {
+                clickAgainState = true
+                binding.btnHideAgain.setImageResource(R.drawable.ic_unhide)
+                binding.editPwCheck.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                binding.editPwCheck.setSelection(binding.editPwCheck.text.length)
+            }
+        }
 //
 //        binding.btnJoin.setOnClickListener {
 //            var editId = binding.editId.text.toString()
@@ -93,12 +97,12 @@ class SignUpActivity : AppCompatActivity() {
 //            overridePendingTransition(0, 0)
 //        }
 //
-//        binding.btnLogin.setOnClickListener {
-//            val intent = Intent(applicationContext, LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//            overridePendingTransition(0, 0)
-//        }
+        binding.btnLogin.setOnClickListener {
+            val intent = Intent(applicationContext, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+            overridePendingTransition(0, 0)
+        }
 
         // 유효성 검사 완료 -> 보류
         binding.btnJoin.setOnClickListener {

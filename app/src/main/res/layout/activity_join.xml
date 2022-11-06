@@ -42,6 +42,7 @@
             android:layout_gravity="right|center"
             android:background="#eeeeee"
             android:layout_marginRight="20dp"
+            android:padding="10dp"
             android:src="@drawable/ic_hide"
             android:tag="0"/>
 
@@ -70,6 +71,7 @@
             android:layout_gravity="right|center"
             android:background="#eeeeee"
             android:layout_marginRight="20dp"
+            android:padding="10dp"
             android:src="@drawable/ic_hide"
             android:tag="0"/>
 

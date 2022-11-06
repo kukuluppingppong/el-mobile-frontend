@@ -35,6 +35,7 @@ class BasicActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            Toast.makeText(applicationContext, "회원가입 성공", Toast.LENGTH_SHORT).show()
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)

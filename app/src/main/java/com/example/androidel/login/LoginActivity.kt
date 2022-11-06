@@ -90,8 +90,11 @@ class LoginActivity : AppCompatActivity() {
                     response: Response<TrainerResponse>,
                 ) {
                     if(response.isSuccessful) {
-                        MyApplication.prefs.trainerId = response.body()!!.data[0].trainer_id.toString()
-                        Log.e("사용자 트레이너 ID", MyApplication.prefs.trainerId!!)
+                        val result = response.body()?.data
+                        if (result!!.isNotEmpty()) {
+                            MyApplication.prefs.trainerId = response.body()?.data?.get(0)?.trainer_id.toString()
+                        }
+//                        Log.e("태그", MyApplication.prefs.trainerId ?: "")
                     }
                 }
 

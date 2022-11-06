@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidel.MyApplication
 import com.example.androidel.databinding.ActivityTrainerBinding
 import com.example.androidel.login.LoginActivity
+import com.example.androidel.send.SendActivity
 import com.example.androidel.trainer.model.TrainerJoinResponse
 import com.example.androidel.trainer.model.TrainerListModel
 import org.json.JSONObject
@@ -61,9 +62,11 @@ class TrainerActivity : AppCompatActivity() {
                         Toast.makeText(this@TrainerActivity, message, Toast.LENGTH_SHORT).show()
                     }
                     if (response.isSuccessful) {
+                        MyApplication.prefs.trainerId = trainerAdapter.trainerId.toString()
                         Toast.makeText(this@TrainerActivity, "매칭 성공", Toast.LENGTH_SHORT).show()
-                        var intent = Intent(applicationContext, LoginActivity::class.java)
+                        var intent = Intent(applicationContext, SendActivity::class.java)
                         startActivity(intent)
+                        finish()
                         overridePendingTransition(0, 0)
                     }
                 }

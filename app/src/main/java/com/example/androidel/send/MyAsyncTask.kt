@@ -25,7 +25,7 @@ class MyAsyncTask(context: SendActivity) : AsyncTask<Void?, Void?, Void?>() {
     }
 
     override fun onPostExecute(result: Void?) {
-        super.onPostExecute(result)
         progressDialog.dismiss()
+        super.onPostExecute(result)
     }
 }
