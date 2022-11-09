@@ -26,6 +26,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        val prefNm = "mPref"
+        val prefs = getSharedPreferences(prefNm, MODE_PRIVATE)
+        prefs.edit().clear().apply()
+
         binding.joinButton.setOnClickListener {
             val intent = Intent(applicationContext, SignUpActivity::class.java)
             startActivity(intent)
@@ -60,18 +64,40 @@ class LoginActivity : AppCompatActivity() {
                         MyApplication.prefs.token = response.body()!!.data.token
                         Log.e("태그", response.toString())
                         Log.e("태그", MyApplication.prefs.token!!)
+                        Log.e("숫자", MyApplication.prefs.trainerId.toString())
 
-                        if (MyApplication.prefs.trainerId != null) {
-                            val intent = Intent(applicationContext, SendActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                            overridePendingTransition(0, 0)
-                        } else {
-                            val intent = Intent(applicationContext, TrainerActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                            overridePendingTransition(0, 0)
-                        }
+                        val call2: Call<TrainerResponse> = MyApplication.trainerService.trainerGet()
+
+                        call2.enqueue(object : Callback<TrainerResponse> {
+                            override fun onResponse(
+                                call: Call<TrainerResponse>,
+                                response: Response<TrainerResponse>,
+                            ) {
+//                                Log.e("트레이너 통신", response.toString())
+                                if (response.isSuccessful) {
+                                    val result = response.body()?.data
+                                    if (result!!.isNotEmpty()) {
+                                        MyApplication.prefs.trainerId =
+                                            response.body()?.data?.get(0)?.trainer_id.toString()
+                                    }
+//                                    Log.e("트레이너 ID", MyApplication.prefs.trainerId.toString())
+                                    if (MyApplication.prefs.trainerId != null) {
+                                        val intent = Intent(applicationContext, SendActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                        overridePendingTransition(0, 0)
+                                    } else {
+                                        val intent = Intent(applicationContext, TrainerActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                        overridePendingTransition(0, 0)
+                                    }
+                                }
+                            }
+                            override fun onFailure(call: Call<TrainerResponse>, t: Throwable) {
+                                Log.e("트레이너 ID 실패", "${t.localizedMessage}")
+                            }
+                        })
                     } else {
                         Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }
@@ -79,27 +105,6 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<LoginResult>, t: Throwable) {
                     Log.e("로그인 실패", "${t.localizedMessage}")
-                }
-            })
-
-            val call2: Call<TrainerResponse> = MyApplication.trainerService.trainerGet()
-
-            call2.enqueue(object: Callback<TrainerResponse> {
-                override fun onResponse(
-                    call: Call<TrainerResponse>,
-                    response: Response<TrainerResponse>,
-                ) {
-                    if(response.isSuccessful) {
-                        val result = response.body()?.data
-                        if (result!!.isNotEmpty()) {
-                            MyApplication.prefs.trainerId = response.body()?.data?.get(0)?.trainer_id.toString()
-                        }
-//                        Log.e("태그", MyApplication.prefs.trainerId ?: "")
-                    }
-                }
-
-                override fun onFailure(call: Call<TrainerResponse>, t: Throwable) {
-                    Log.e("트레이너 ID 실패", "${t.localizedMessage}")
                 }
             })
         }
